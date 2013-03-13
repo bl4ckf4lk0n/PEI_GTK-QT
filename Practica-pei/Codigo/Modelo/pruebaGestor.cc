@@ -2,7 +2,7 @@
 
 int main(){
 	gestorFicheros g;
-	g.add("hola.txt");
+	g.add("pruebaPersonas.txt");
 	g.getPersonas(0);
 
 	return 0;
