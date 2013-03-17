@@ -50,3 +50,23 @@ void Buscar()
 	    //Comparar
 	}
 }
+
+void BorrarPersona(int id)
+{
+	int cont = 0;
+	for (persona p : this->listaPersonas ) 
+	{
+	    if(p.getID() == id)
+	    {
+	    	break;
+	    }
+	    cont++;
+	}
+
+	listaPersonas.erase(listaPersonas.begin() + cont);
+}
+
+void InsertarPersona(persona p)
+{
+	listaPersonas.push_back(p);
+}

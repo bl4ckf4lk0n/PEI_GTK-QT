@@ -17,6 +17,7 @@ public:
 	persona& operator=(const persona&);
 
 	//Get
+	int getID(){return id;}
 	string getNombre(){return nombre;}
 	string getDireccion(){return direccion;}
 	string getPoblacion(){return poblacion;}
@@ -25,6 +26,7 @@ public:
 	string getEmail(){return email;}
 
 	//Set
+	void setID(int id){this->id = id;}
 	void setNombre(string nombre){this->nombre = nombre;}
 	void setDireccion(string direccion){this->direccion = direccion;}
 	void setPoblacion(string poblacion){this->poblacion = poblacion;}
@@ -33,6 +35,7 @@ public:
 	void setEmail(string email){this->email = email;}
 
 private:
+	int id;
 	string nombre;
 	string direccion;
 	string poblacion;

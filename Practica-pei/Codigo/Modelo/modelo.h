@@ -39,7 +39,9 @@ public:
 	//Funciones usuario
 	void ActualizarVistas();
 	void GuardarEnFichero();
-	void Buscar();
+	void Buscar(/*Datos de busqueda (Por definir)*/);
+	void BorrarPersona(int);
+	void InsertarPersona(persona);
 
 private:
 	std::vector<persona> listaPersonas;
