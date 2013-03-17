@@ -11,7 +11,7 @@ public:
 
 	//Funciones canónicas
 	persona(){}
-	persona(string,string,string,string,int,string);
+	persona(string nombre, string direccion, string poblacion, string cod_postal, int telefono, string email);
 	persona(const persona&);
 	~persona();
 	persona& operator=(const persona&);
