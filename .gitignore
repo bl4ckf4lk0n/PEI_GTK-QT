@@ -13,3 +13,5 @@
 *.a
 
 *sublime-*
+*.gch
+*a.out
