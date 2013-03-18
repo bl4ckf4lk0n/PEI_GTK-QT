@@ -14,6 +14,7 @@ class gestorFicheros
 {
 private:
 	vector<string> files;
+	void escribirPersona(ofstream & salida, persona nuevaPersona);
 
 public:
 	gestorFicheros(){}
@@ -25,7 +26,7 @@ public:
 
 	vector<persona> getPersonas(int indiceFichero);
 
-	//void escribirPersona(int indiceFichero, persona nuevaPersona);
+	void escribirVectorPersonas(int indiceFichero, vector<persona> nuevasPersonas);
 	void anyadirPersona(int indiceFichero, persona nuevaPersona);
 
 	/* data */
