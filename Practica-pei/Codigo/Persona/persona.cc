@@ -1,6 +1,6 @@
 #include "persona.h"
 
-persona::persona(string nombre, string direccion, string poblacion, string cod_postal, int telefono, string email)
+persona::persona(string nombre, string direccion, string poblacion, string cod_postal, string telefono, string email)
 {
 	this->nombre = nombre;
 	this->direccion = direccion;
@@ -26,7 +26,7 @@ persona::~persona()
 	this->direccion = "";
 	this->poblacion = "";
 	this->cod_postal = "";
-	this->telefono = -1;
+	this->telefono = "";
 	this->email = "";	
 }
 

@@ -11,7 +11,7 @@ public:
 
 	//Funciones canónicas
 	persona(){}
-	persona(string nombre, string direccion, string poblacion, string cod_postal, int telefono, string email);
+	persona(string nombre, string direccion, string poblacion, string cod_postal, string telefono, string email);
 	persona(const persona&);
 	~persona();
 	persona& operator=(const persona&);
@@ -22,7 +22,7 @@ public:
 	string getDireccion(){return direccion;}
 	string getPoblacion(){return poblacion;}
 	string getCodPostal(){return cod_postal;}
-	int getTelefono(){return telefono;}
+	string getTelefono(){return telefono;}
 	string getEmail(){return email;}
 
 	//Set
@@ -31,7 +31,7 @@ public:
 	void setDireccion(string direccion){this->direccion = direccion;}
 	void setPoblacion(string poblacion){this->poblacion = poblacion;}
 	void setCodPostal(string cod_postal){this->cod_postal = cod_postal;}
-	void setTelefono(int telefono){this->telefono = telefono;}
+	void setTelefono(string telefono){this->telefono = telefono;}
 	void setEmail(string email){this->email = email;}
 
 private:
@@ -40,7 +40,7 @@ private:
 	string direccion;
 	string poblacion;
 	string cod_postal;
-	int telefono;
+	string telefono;
 	string email;
 };
 
