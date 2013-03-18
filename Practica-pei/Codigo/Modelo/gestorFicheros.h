@@ -5,6 +5,9 @@
 #include <fstream>
 #include <vector>
 
+
+#include "../Persona/persona.h"
+
 using namespace std;
 
 class gestorFicheros
@@ -18,7 +21,7 @@ public:
 
 	void add(string file);
 
-	int/*vector<persona>*/ getPersonas(int indiceFichero);
+	vector<persona> getPersonas(int indiceFichero);
 
 	//void escribirPersona(int indiceFichero, persona nuevaPersona);
 
