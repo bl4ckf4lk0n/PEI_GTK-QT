@@ -77,3 +77,8 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 	}	
 	return retorno;
 }
+
+vector<string> gestorFicheros::getFicheros(){
+	return files;
+}
+

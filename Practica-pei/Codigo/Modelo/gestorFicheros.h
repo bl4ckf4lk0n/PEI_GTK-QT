@@ -20,6 +20,8 @@ public:
 	~gestorFicheros(){}
 
 	void add(string file);
+	vector<string> getFicheros();
+
 
 	vector<persona> getPersonas(int indiceFichero);
 
