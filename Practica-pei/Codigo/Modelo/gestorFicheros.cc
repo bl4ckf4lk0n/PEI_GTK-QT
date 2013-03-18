@@ -82,3 +82,20 @@ vector<string> gestorFicheros::getFicheros(){
 	return files;
 }
 
+void gestorFicheros::anyadirPersona(int indiceFichero, persona nuevaPersona){
+	ofstream salida;
+	salida.open(files.at(indiceFichero).c_str(),ios::app);
+
+	if(salida.is_open()){
+		salida<<endl
+			<<"NOMBRE "<<nuevaPersona.getNombre()<<endl
+			<<"DIRECCION "<<nuevaPersona.getDireccion()<<endl
+			<<"POBLACION "<<nuevaPersona.getPoblacion()<<endl
+			<<"CPOSTAL "<<nuevaPersona.getCodPostal()<<endl
+			<<"TELEFONO "<<nuevaPersona.getTelefono()<<endl
+			<<"EMAIL "<<nuevaPersona.getEmail()<<endl;
+		salida.close();
+	}else{
+		cerr<<"[E] Ha ocurrido un error al abrir el registro de personas"<<endl; // TODO: Deberíamos lanzar una excepción?
+	}	
+}

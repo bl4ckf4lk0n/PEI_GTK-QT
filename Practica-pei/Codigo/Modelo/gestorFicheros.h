@@ -26,6 +26,7 @@ public:
 	vector<persona> getPersonas(int indiceFichero);
 
 	//void escribirPersona(int indiceFichero, persona nuevaPersona);
+	void anyadirPersona(int indiceFichero, persona nuevaPersona);
 
 	/* data */
 };
