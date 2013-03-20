@@ -92,7 +92,6 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 
 					persona nueva(nombre,direccion,poblacion,cod_postal,telefono,email);
 					retorno.push_back(nueva);
-					cout<<endl<<"Nueva persona:"<<endl<<nombre<<endl<<direccion<<endl<<poblacion<<endl<<cod_postal<<endl<<telefono<<endl<<email<<endl;
 
 				}catch(ios_base::failure ex){
 					throw fileException("[E] Archivo con formato incorrecto");
