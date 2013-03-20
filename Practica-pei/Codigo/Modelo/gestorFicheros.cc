@@ -4,7 +4,33 @@
 #include <boost/lexical_cast.hpp>
 
 void gestorFicheros::add(string file){
-	files.push_back(file);
+	ifstream origen;
+	origen.open(file.c_str());
+	if(origen.is_open()){
+		files.push_back(file);
+		origen.close();
+	}else{
+		cerr<<"[E] Ha ocurrido un error al abrir el registro de personas"<<endl; // TODO: Deberíamos lanzar una excepción?
+	}
+	
+}
+
+void gestorFicheros::newFile(string file){
+	ifstream origen;
+	origen.open(file.c_str());
+	if(!origen.is_open()){
+		files.push_back(file);
+		ofstream nuevo;
+		nuevo.open(file.c_str());
+		if(nuevo.is_open()){
+			nuevo.close();
+		}else{
+			cerr<<"[E] Ha ocurrido un error al crear el fichero nuevo."<<endl; // TODO: Deberíamos lanzar una excepción?
+		}
+	}else{
+		cerr<<"[E] No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre."<<endl; // TODO: Deberíamos lanzar una excepción?
+		origen.close();
+	}
 }
 
 vector<persona> gestorFicheros::getPersonas(int indiceFichero){

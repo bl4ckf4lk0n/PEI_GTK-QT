@@ -21,6 +21,7 @@ public:
 	~gestorFicheros(){}
 
 	void add(string file);
+	void newFile(string file);
 	vector<string> getFicheros();
 
 
