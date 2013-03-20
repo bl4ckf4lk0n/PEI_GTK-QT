@@ -3,14 +3,15 @@
 #include <boost/algorithm/string/regex.hpp>
 #include <boost/lexical_cast.hpp>
 
-void gestorFicheros::add(string file){
+
+void gestorFicheros::add(string file) {
 	ifstream origen;
 	origen.open(file.c_str());
 	if(origen.is_open()){
 		files.push_back(file);
 		origen.close();
 	}else{
-		cerr<<"[E] Ha ocurrido un error al abrir el registro de personas"<<endl; // TODO: Deberíamos lanzar una excepción?
+		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
 	}
 	
 }
@@ -25,11 +26,12 @@ void gestorFicheros::newFile(string file){
 		if(nuevo.is_open()){
 			nuevo.close();
 		}else{
-			cerr<<"[E] Ha ocurrido un error al crear el fichero nuevo."<<endl; // TODO: Deberíamos lanzar una excepción?
+			throw fileException("[E] Ha ocurrido un error al crear el nuevo fichero.");
 		}
 	}else{
-		cerr<<"[E] No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre."<<endl; // TODO: Deberíamos lanzar una excepción?
 		origen.close();
+		throw fileException("[E] No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre.");
+		
 	}
 }
 
@@ -93,13 +95,13 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					cout<<endl<<"Nueva persona:"<<endl<<nombre<<endl<<direccion<<endl<<poblacion<<endl<<cod_postal<<endl<<telefono<<endl<<email<<endl;
 
 				}catch(ios_base::failure ex){
-					cerr<<"[E] Archivo con formato incorrecto"<<endl; // TODO: Deberíamos lanzar una excepción?
+					throw fileException("[E] Archivo con formato incorrecto");
 				}
 			}
 		}
 		origen.close();
 	}else{
-		cerr<<"[E] Ha ocurrido un error al abrir el registro de personas"<<endl; // TODO: Deberíamos lanzar una excepción?
+		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
 	}	
 	return retorno;
 }
@@ -129,7 +131,7 @@ void gestorFicheros::anyadirPersona(int indiceFichero, persona nuevaPersona){
 		escribirPersona(salida, nuevaPersona);
 		salida.close();
 	}else{
-		cerr<<"[E] Ha ocurrido un error al abrir el registro de personas"<<endl; // TODO: Deberíamos lanzar una excepción?
+		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
 	}	
 }
 

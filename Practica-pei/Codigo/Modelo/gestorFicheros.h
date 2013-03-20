@@ -5,7 +5,7 @@
 #include <fstream>
 #include <vector>
 
-
+#include "fileException.h"
 #include "../Persona/persona.h"
 
 using namespace std;
@@ -20,7 +20,7 @@ public:
 	gestorFicheros(){}
 	~gestorFicheros(){}
 
-	void add(string file);
+	void add(string file) ;
 	void newFile(string file);
 	vector<string> getFicheros();
 
