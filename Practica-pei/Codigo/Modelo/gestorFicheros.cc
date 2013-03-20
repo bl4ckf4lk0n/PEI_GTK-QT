@@ -1,6 +1,7 @@
 #include "gestorFicheros.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/algorithm/string/regex.hpp>
+#include <boost/regex.hpp>
 #include <boost/lexical_cast.hpp>
 
 
@@ -51,33 +52,47 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					string nombre, direccion,poblacion,cod_postal,email;
 					string telefono;
 					boost::regex regEx;
-					regEx= "^[A-Z]+";
+					regEx= "^NOMBRE";
 
 					//linea ahora contiene el nombre
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					nombre = linea;
 
 					getline(origen, linea);
 					//linea ahora contiene la dirección
+					regEx= "^DIRECCION";
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					direccion = linea;
 
 					getline(origen, linea);
 					//linea ahora contiene la población
+					regEx= "^POBLACION";
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					poblacion = linea;
 
 					getline(origen, linea);
 					//linea ahora contiene el cpostal
+					regEx= "^CPOSTAL";
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					cod_postal = linea;
 
 					getline(origen, linea);
 					//linea ahora contiene el teléfono
+					regEx= "^TELEFONO";
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					/*cout<< "El telefono es: -" + linea + "-"<<endl;
@@ -86,6 +101,9 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 
 					getline(origen, linea);
 					//linea ahora contiene el email
+					regEx= "^EMAIL";
+					if(!boost::regex_search(linea,regEx))
+						throw fileException("[E] Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					email = linea;
