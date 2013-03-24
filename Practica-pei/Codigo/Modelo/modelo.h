@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "../Persona/persona.h"
+#include "persona.h"
 #include "gestorFicheros.h"
 using namespace std;
 

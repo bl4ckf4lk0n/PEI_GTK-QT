@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include "../Modelo/modelo.h"
-#include "../Persona/persona.h"
+#include "../Modelo/persona.h"
 using namespace std;
 
 
