@@ -6,7 +6,7 @@
 #include <vector>
 
 #include "fileException.h"
-#include "../Persona/persona.h"
+#include "persona.h"
 
 using namespace std;
 

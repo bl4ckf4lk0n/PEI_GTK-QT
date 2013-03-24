@@ -1,5 +1,5 @@
 #include "gestorFicheros.h"
-#include "../Persona/persona.h"
+#include "persona.h"
 
 int main(){
 	try{
