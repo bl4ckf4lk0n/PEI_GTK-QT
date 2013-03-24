@@ -20,8 +20,8 @@ public:
 	gestorFicheros(){}
 	~gestorFicheros(){}
 
-	void add(string file) ;
-	void newFile(string file);
+	int add(string file) ;
+	int newFile(string file);
 	vector<string> getFicheros();
 
 

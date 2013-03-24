@@ -5,27 +5,30 @@
 #include <boost/lexical_cast.hpp>
 
 
-void gestorFicheros::add(string file) {
+int gestorFicheros::add(string file) {
 	ifstream origen;
 	origen.open(file.c_str());
 	if(origen.is_open()){
 		files.push_back(file);
 		origen.close();
+		return files.size()-1;
 	}else{
 		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
 	}
-	
+	return -1;
 }
 
-void gestorFicheros::newFile(string file){
+int gestorFicheros::newFile(string file){
 	ifstream origen;
 	origen.open(file.c_str());
 	if(!origen.is_open()){
-		files.push_back(file);
+		
 		ofstream nuevo;
 		nuevo.open(file.c_str());
 		if(nuevo.is_open()){
 			nuevo.close();
+			files.push_back(file);
+			return files.size()-1;
 		}else{
 			throw fileException("[E] Ha ocurrido un error al crear el nuevo fichero.");
 		}
@@ -34,6 +37,7 @@ void gestorFicheros::newFile(string file){
 		throw fileException("[E] No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre.");
 		
 	}
+	return -1;
 }
 
 vector<persona> gestorFicheros::getPersonas(int indiceFichero){
