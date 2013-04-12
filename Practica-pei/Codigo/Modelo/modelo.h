@@ -42,7 +42,7 @@ public:
 
 	//Funciones usuario
 	//void ActualizarVistas();
-	void GuardarEnFichero();
+	void GuardarEnFichero(string file);
 	void Buscar(/*Datos de busqueda (Por definir)*/);
 	void BorrarPersona(int);
 	void InsertarPersona(persona);

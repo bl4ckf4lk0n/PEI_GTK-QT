@@ -50,9 +50,12 @@ modelo& modelo::operator=(const modelo& mod)
 	}
 }*/
 
-void modelo::GuardarEnFichero()
+void modelo::GuardarEnFichero(string file)
 {
 	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
+	gestorFicheros fichero;
+	fichero.add(file);
+	fichero.escribirVectorPersonas(0,this->listaPersonas);
 }
 
 void modelo::Buscar()
@@ -65,22 +68,24 @@ void modelo::Buscar()
 
 void modelo::BorrarPersona(int id)
 {
-	int cont = 0;
-	for (persona p : this->listaPersonas ) 
+	//int cont = 0;
+	/*for (persona p : this->listaPersonas ) 
 	{
 	    if(p.getID() == id)
 	    {
 	    	break;
 	    }
 	    cont++;
-	}
+	}*/
 
-	listaPersonas.erase(listaPersonas.begin() + cont);
+	listaPersonas.erase(listaPersonas.begin() + id);
+	this->numPersonas--;
 }
 
 void modelo::InsertarPersona(persona p)
 {
 	listaPersonas.push_back(p);
+	this->numPersonas++;
 }
 
 void modelo::LeerFichero(string file)
