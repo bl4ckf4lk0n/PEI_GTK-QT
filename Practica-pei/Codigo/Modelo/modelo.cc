@@ -109,3 +109,17 @@ persona modelo::MostrarPersona(int num)
 		return listaPersonas[0];
 	}
 }
+
+persona* modelo::ObtenerReferenciaPersona(int num)
+{
+
+	if(num < this->numPersonas)
+	{
+		return &listaPersonas[num];
+	}
+	else
+	{
+		//Lanzar excepción
+		return &listaPersonas[0];
+	}
+}

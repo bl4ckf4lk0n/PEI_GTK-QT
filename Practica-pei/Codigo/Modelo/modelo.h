@@ -48,6 +48,7 @@ public:
 	void InsertarPersona(persona);
 	void LeerFichero(string file);
 	persona MostrarPersona(int num);
+	persona* ObtenerReferenciaPersona(int num);
 
 private:
 	std::vector<persona> listaPersonas;
