@@ -22,7 +22,9 @@ public:
 
 	int add(string file) ;
 	int newFile(string file);
+	void removeFile(int pos);
 	vector<string> getFicheros();
+	void modificarFichero(string file,int pos);
 
 
 	vector<persona> getPersonas(int indiceFichero);

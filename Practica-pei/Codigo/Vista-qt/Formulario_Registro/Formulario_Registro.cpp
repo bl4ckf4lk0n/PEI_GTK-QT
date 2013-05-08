@@ -2,13 +2,13 @@
 
 #include "Formulario_Registro.h"
 
-Formulario_Registro::Formulario_Registro(QWidget *parent,modelo m)
+Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m)
 {
  	this->parent = parent;
 	ui.setupUi(this);
 	this->model = m;
 	this->index = 0;
-	this->MostrarPersona(this->model.MostrarPersona(0));
+	this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
 
 }
 
@@ -40,10 +40,10 @@ void Formulario_Registro::MostrarPersona(persona p)
 
 void Formulario_Registro::on_Btn_Adelante_clicked()
 {
-	if(this->index+1 < this->model.getNumPersonas())
+	if(this->index+1 < this->model->getNumPersonas(this->parent->currentIndex()))
 	{
 		this->index++;
-		this->MostrarPersona(this->model.MostrarPersona(this->index));
+		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 	}
 }
 
@@ -52,13 +52,13 @@ void Formulario_Registro::on_Btn_Atras_clicked()
 	if(this->index-1 >= 0)
 	{
 		this->index--;
-		this->MostrarPersona(this->model.MostrarPersona(this->index));
+		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 	}
 }
 
 void Formulario_Registro::on_Btn_ModRegistro_clicked()
 {
-	persona* p = this->model.ObtenerReferenciaPersona(this->index);
+	persona* p = this->model->ObtenerReferenciaPersona(this->parent->currentIndex(),this->index);
 	
 	p->setNombre(ui.LE_Nombre->text().toStdString());
 	p->setDireccion(ui.LE_Direccion->text().toStdString());
@@ -70,17 +70,18 @@ void Formulario_Registro::on_Btn_ModRegistro_clicked()
 
 void Formulario_Registro::on_Btn_BorrarRegistro_clicked()
 {
-	//Funciona mal, modificar!!!
-	this->model.BorrarPersona(this->index);
-	if(this->index-1 >= 0)
+	this->model->BorrarPersona(this->parent->currentIndex(),this->index);
+	if(this->model->getNumPersonas(this->parent->currentIndex()) > 0)
 	{
-		this->index--;
-		this->MostrarPersona(this->model.MostrarPersona(this->index));		
+		if(this->model->getNumPersonas(this->parent->currentIndex()) <= this->index)
+		{
+			this->index--;
+		}		
+		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 	}
 	else
 	{
 		this->close();
-		cout<<this->index<<endl;
 	}
 
 

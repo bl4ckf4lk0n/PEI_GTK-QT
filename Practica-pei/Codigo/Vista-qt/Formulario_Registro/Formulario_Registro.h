@@ -12,7 +12,7 @@ class Formulario_Registro : public QWidget
  Q_OBJECT
 
 public:
- Formulario_Registro(QWidget *parent,modelo m);
+ Formulario_Registro(QTabWidget *parent,modelo* m);
 
 private slots:
 	void on_Btn_Adelante_clicked();
@@ -22,8 +22,8 @@ private slots:
 
 private:
  Ui::Form_registro ui;
- QWidget* parent;
- modelo model;
+ QTabWidget* parent;
+ modelo* model;
  void MostrarPersona(persona p);
  int index;
 };

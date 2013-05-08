@@ -4,32 +4,33 @@
 
 Plantilla::Plantilla(QMainWindow *parent)
 {
-ui.setupUi(this);
-ui.tabWidget->setUpdatesEnabled(false);
+    ui.setupUi(this);
+    ui.tabWidget->setUpdatesEnabled(false);
 
 
-QString filename = AbrirArchivo();
+    QString filename = AbrirArchivo();
 
-QStringList list = filename.split('/');
+    QStringList list = filename.split('/');
 
-//Resetear QTabWidget
-ui.tabWidget->clear();
+    //Resetear QTabWidget
+    ui.tabWidget->clear();
 
-this->NuevaPestanya(list[list.count()-1],this->models.size()-1);
+    this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1);
 
 }
 
 void Plantilla::on_actionAbrir_triggered()
 {
-QString filename = AbrirArchivo();
+    QString filename = AbrirArchivo();
 
-QStringList list = filename.split('/');
+    QStringList list = filename.split('/');
 
-this->NuevaPestanya(list[list.count()-1],this->models.size()-1);
+    this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1);
 }
 
 void Plantilla::on_tabWidget_tabCloseRequested(int index)
 {
+    model.EliminarFichero(index);
     ui.tabWidget->removeTab(index);
 }
 
@@ -43,9 +44,7 @@ QString Plantilla::AbrirArchivo()
 
     if( !filename.isNull() )
     {
-      modelo model;
       model.LeerFichero(filename.toStdString());
-      this->models.push_back(model);
       return filename;
     }
     else
@@ -54,12 +53,38 @@ QString Plantilla::AbrirArchivo()
     }
 }
 
-void Plantilla::NuevaPestanya(QString nomPestanya,int modelo)
+void Plantilla::NuevaPestanya(QString nomPestanya,int pos)
 {
 
-    //Añadir QWidget Formulario_Registro con el 1º registro del modelo leido
-    Formulario_Registro* form = new Formulario_Registro(this,models[modelo]);
+    Formulario_Registro* form = new Formulario_Registro(ui.tabWidget,&model);
 
     ui.tabWidget->addTab(form,nomPestanya);
     ui.tabWidget->setUpdatesEnabled(true);
+}
+
+void Plantilla::on_actionNuevo_registro_triggered()
+{
+    NuevoRegistro* nuevo = new NuevoRegistro(this,&model,ui.tabWidget->currentIndex());
+    nuevo->exec();
+}
+
+void Plantilla::on_actionGuardar_triggered()
+{
+    model.GuardarEnFichero(this->ui.tabWidget->currentIndex());
+}
+
+void Plantilla::on_actionGuardar_como_triggered()
+{
+    QString filename = QFileDialog::getSaveFileName( 
+    this, 
+    tr("Guardar como..."), 
+    QDir::currentPath(), 
+    tr("Document files (*.txt);;All files (*.*)") );
+
+    if( !filename.isNull() )
+    {
+      model.GuardarComo(filename.toStdString(),this->ui.tabWidget->currentIndex());
+      QStringList list = filename.split('/');
+      ui.tabWidget->setTabText(this->ui.tabWidget->currentIndex(),list[list.count()-1]);
+    }
 }
