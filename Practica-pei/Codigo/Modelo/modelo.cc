@@ -2,30 +2,16 @@
 
 modelo::modelo()
 {
-	numPersonas = 0;
-	numVistas = 0;
 }
 
-modelo::modelo(std::vector<persona> listaPersonas/*, std::vector<vista> listaVistas*/)
-{
-	this->listaPersonas = listaPersonas;
-	//this->listaVistas = listaVistas;
-	numPersonas = listaPersonas.size();
-	//numVistas = listaVistas.size();
-}
 
 modelo::modelo(const modelo& mod)
 {
 	this->listaPersonas = mod.listaPersonas;
-	//this->listaVistas = mod.listaVistas;
-	this->numPersonas = mod.numPersonas;
-	this->numVistas = mod.numVistas;
 }
 
 modelo::~modelo()
 {
-	this->numPersonas=0;
-	this->numVistas=0;
 }
 
 modelo& modelo::operator=(const modelo& mod)
@@ -33,79 +19,81 @@ modelo& modelo::operator=(const modelo& mod)
 	if(this != &mod)
 	{
 		this->listaPersonas = mod.listaPersonas;
-		//this->listaVistas = mod.listaVistas;
-		this->numPersonas = mod.numPersonas;
-		this->numVistas = mod.numVistas;
 	}
 
 
 	return *this;
 }
 
-/*void modelo::ActualizarVistas()
-{
-	for (vista v : this->listaVistas ) 
-	{
-	    //Actualizar vista
-	}
-}*/
 
-void modelo::GuardarEnFichero(string file)
+void modelo::GuardarEnFichero(int pos)
 {
 	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
-	gestorFicheros fichero;
-	fichero.add(file);
-	fichero.escribirVectorPersonas(0,this->listaPersonas);
+	fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
+}
+
+void modelo::GuardarComo(string fich, int pos)
+{
+	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
+	int f = fichero.newFile(fich);
+	fichero.escribirVectorPersonas(f,this->listaPersonas[pos]);
+	fichero.modificarFichero(fich,pos);
 }
 
 void modelo::Buscar()
 {
-	for (persona p : this->listaPersonas ) 
-	{
-	    //Comparar
-	}
-}
-
-void modelo::BorrarPersona(int id)
-{
-	//int cont = 0;
 	/*for (persona p : this->listaPersonas ) 
 	{
-	    if(p.getID() == id)
-	    {
-	    	break;
-	    }
-	    cont++;
+	    //Comparar
 	}*/
-
-	listaPersonas.erase(listaPersonas.begin() + id);
-	this->numPersonas--;
 }
 
-void modelo::InsertarPersona(persona p)
+void modelo::BorrarPersona(int pos,int id)
 {
-	listaPersonas.push_back(p);
-	this->numPersonas++;
+	listaPersonas[pos].erase(listaPersonas[pos].begin() + id);
+}
+
+void modelo::InsertarPersona(int pos,persona p)
+{
+	listaPersonas[pos].push_back(p);
 }
 
 void modelo::LeerFichero(string file)
 {
-	gestorFicheros fichero;
-	fichero.add(file);
-	this->listaPersonas = fichero.getPersonas(0);
-	this->numPersonas = this->listaPersonas.size();
+	int pos = this->fichero.add(file);
+	this->listaPersonas.push_back(fichero.getPersonas(pos));
 }
 
-persona modelo::MostrarPersona(int num)
+void modelo::EliminarFichero(int pos)
+{
+	listaPersonas.erase(listaPersonas.begin()+pos);
+	fichero.removeFile(pos);
+}
+
+persona modelo::MostrarPersona(int pos,int num)
 {
 
-	if(num < this->numPersonas)
+	if(num < this->getNumPersonas(pos))
 	{
-		return listaPersonas[num];
+		return listaPersonas[pos][num];
 	}
 	else
 	{
 		//Lanzar excepción
-		return listaPersonas[0];
+		return listaPersonas[pos][0];
+	}
+}
+
+persona* modelo::ObtenerReferenciaPersona(int pos,int num)
+{
+
+	if(num < this->getNumPersonas(pos))
+	{
+		return &listaPersonas[pos][num];
+	}
+	else
+	{
+		//Lanzar excepción
+		return &listaPersonas[pos][0];
 	}
 }

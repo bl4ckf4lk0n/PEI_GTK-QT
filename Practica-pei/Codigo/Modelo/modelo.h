@@ -8,14 +8,6 @@
 #include "gestorFicheros.h"
 using namespace std;
 
-/*class vista
-{
-public:
-	vista();
-	~vista();
-
-};*/
-
 
 class modelo
 {
@@ -23,37 +15,29 @@ public:
 
 	//Funciones canónicas
 	modelo();
-	modelo(std::vector<persona>/*,std::vector<vista>*/);
 	modelo(const modelo&);
 	~modelo();
 	modelo& operator=(const modelo&);
 
 	//Get
-	std::vector<persona> getListaPersonas(){return this->listaPersonas;}
-	//std::vector<vista> getListaVistas(){return this->listaVistas;}
-	int getNumPersonas(){return this->numPersonas;}
-	int getNumVistas(){return this->numVistas;}
-
-	//Set
-	void setListaPersonas(std::vector<persona> v){this->listaPersonas = v;}
-	//void setListaVistas(std::vector<vista> v){this->listaVistas = v;}
-	void setNumPersonas(int numPersonas){this->numPersonas = numPersonas;}
-	void setNumVistas(int numVistas){this->numVistas = numVistas;}
+	std::vector<persona> getListaPersonas(int pos){return this->listaPersonas[pos];}
+	int getNumPersonas(int pos){return this->listaPersonas[pos].size();}
+	int getNumFicheros(){return listaPersonas.size();}
 
 	//Funciones usuario
-	//void ActualizarVistas();
-	void GuardarEnFichero(string file);
+	void GuardarEnFichero(int pos);
+	void GuardarComo(string fich, int pos);
 	void Buscar(/*Datos de busqueda (Por definir)*/);
-	void BorrarPersona(int);
-	void InsertarPersona(persona);
+	void BorrarPersona(int pos,int id);
+	void InsertarPersona(int pos, persona p);
 	void LeerFichero(string file);
-	persona MostrarPersona(int num);
+	void EliminarFichero(int pos);
+	persona MostrarPersona(int pos,int num);
+	persona* ObtenerReferenciaPersona(int pos,int num);
 
 private:
-	std::vector<persona> listaPersonas;
-	//std::vector<vista>	listaVistas;
-	int numPersonas;
-	int numVistas;
+	std::vector<std::vector<persona>> listaPersonas;
+	gestorFicheros fichero;
 };
 
 

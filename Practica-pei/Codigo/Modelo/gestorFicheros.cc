@@ -165,3 +165,13 @@ void gestorFicheros::escribirPersona(ofstream& salida, persona nuevaPersona){
 			<<"TELEFONO "<<nuevaPersona.getTelefono()<<endl
 			<<"EMAIL "<<nuevaPersona.getEmail()<<endl;
 }
+
+void gestorFicheros::removeFile(int pos)
+{
+	files.erase(files.begin()+pos);
+}
+
+void gestorFicheros::modificarFichero(string file,int pos)
+{
+	files[pos] = file;
+}
