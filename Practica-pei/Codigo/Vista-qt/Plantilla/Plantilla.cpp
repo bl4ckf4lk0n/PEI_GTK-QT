@@ -10,12 +10,16 @@ Plantilla::Plantilla(QMainWindow *parent)
 
     QString filename = AbrirArchivo();
 
-    QStringList list = filename.split('/');
-
     //Resetear QTabWidget
     ui.tabWidget->clear();
 
-    this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1);
+    if(filename != "")
+    {
+        QStringList list = filename.split('/');
+
+        this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1,false);       
+    }
+
 
 }
 
@@ -23,9 +27,13 @@ void Plantilla::on_actionAbrir_triggered()
 {
     QString filename = AbrirArchivo();
 
-    QStringList list = filename.split('/');
+    if(filename != "")
+    {
+        QStringList list = filename.split('/');
 
-    this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1);
+        this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1,false);       
+    }
+
 }
 
 void Plantilla::on_tabWidget_tabCloseRequested(int index)
@@ -49,42 +57,109 @@ QString Plantilla::AbrirArchivo()
     }
     else
     {
-    	return NULL;
+    	return "";
     }
 }
 
-void Plantilla::NuevaPestanya(QString nomPestanya,int pos)
+void Plantilla::NuevaPestanya(QString nomPestanya,int pos,bool nuevo)
 {
+    ui.tabWidget->setUpdatesEnabled(false);
 
-    Formulario_Registro* form = new Formulario_Registro(ui.tabWidget,&model);
+    Formulario_Registro* form = new Formulario_Registro(ui.tabWidget,&model,nuevo);
 
-    ui.tabWidget->addTab(form,nomPestanya);
-    ui.tabWidget->setUpdatesEnabled(true);
+    ui.tabWidget->addTab(form,nomPestanya);  
+    
+    ui.tabWidget->setUpdatesEnabled(true);  
 }
 
 void Plantilla::on_actionNuevo_registro_triggered()
 {
-    NuevoRegistro* nuevo = new NuevoRegistro(this,&model,ui.tabWidget->currentIndex());
-    nuevo->exec();
+    if(this->ui.tabWidget->currentIndex() != -1)
+    {
+        NuevoRegistro* nuevo = new NuevoRegistro(this,&model,ui.tabWidget->currentIndex());
+        nuevo->exec();
+
+        Formulario_Registro* form = (Formulario_Registro*) this->ui.tabWidget->widget(ui.tabWidget->currentIndex());
+
+        if(!form->isVisible())
+        {
+            form->MostrarPersona(this->model.MostrarPersona(ui.tabWidget->currentIndex(),0));
+            form->show();
+        }
+    }
+    
 }
 
 void Plantilla::on_actionGuardar_triggered()
 {
-    model.GuardarEnFichero(this->ui.tabWidget->currentIndex());
+    if(this->ui.tabWidget->currentIndex() != -1)
+    {
+        model.GuardarEnFichero(this->ui.tabWidget->currentIndex());
+    }
 }
 
 void Plantilla::on_actionGuardar_como_triggered()
 {
+    if(this->ui.tabWidget->currentIndex() != -1)
+    {
+        QString filename = QFileDialog::getSaveFileName( 
+        this, 
+        tr("Guardar como..."), 
+        QDir::currentPath(), 
+        tr("Document files (*.txt);;All files (*.*)") );
+
+        if( !filename.isNull() )
+        {
+          model.GuardarComo(filename.toStdString(),this->ui.tabWidget->currentIndex());
+          QStringList list = filename.split('/');
+          ui.tabWidget->setTabText(this->ui.tabWidget->currentIndex(),list[list.count()-1]);
+        }        
+    }
+
+}
+
+void Plantilla::on_actionNuevo_archivo_triggered()
+{
+    QString filename = this->NuevoArchivo();
+
+    if(filename != "")
+    {
+        QStringList list = filename.split('/');
+
+        this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1,true);
+
+         model.GuardarEnFichero(model.getNumFicheros()-1);       
+    }
+
+}
+
+QString Plantilla::NuevoArchivo()
+{
     QString filename = QFileDialog::getSaveFileName( 
     this, 
-    tr("Guardar como..."), 
+    tr("Nuevo archivo"), 
     QDir::currentPath(), 
     tr("Document files (*.txt);;All files (*.*)") );
 
     if( !filename.isNull() )
     {
-      model.GuardarComo(filename.toStdString(),this->ui.tabWidget->currentIndex());
-      QStringList list = filename.split('/');
-      ui.tabWidget->setTabText(this->ui.tabWidget->currentIndex(),list[list.count()-1]);
+      model.NuevoArchivo(filename.toStdString());
+      return filename;
     }
+    return "";   
+}
+
+void Plantilla::on_actionBuscar_triggered()
+{
+    if(this->ui.tabWidget->currentIndex() != -1)
+    {
+        Formulario_Busqueda* buscar = new Formulario_Busqueda(this,ui.tabWidget,&model,ui.tabWidget->currentIndex());
+        buscar->exec();
+    }
+}
+
+void Plantilla::on_actionAcerca_triggered()
+{
+    Acerca_de* acerca = new Acerca_de(this);
+    acerca->exec();
 }

@@ -10,7 +10,7 @@ class persona
 public:
 
 	//Funciones canónicas
-	persona(){}
+	persona(){nombre = ""; direccion =""; poblacion=""; cod_postal=""; telefono=""; email="";}
 	persona(string nombre, string direccion, string poblacion, string cod_postal, string telefono, string email);
 	persona(const persona&);
 	~persona();

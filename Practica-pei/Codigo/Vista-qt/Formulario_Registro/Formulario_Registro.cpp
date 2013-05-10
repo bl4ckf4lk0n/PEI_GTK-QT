@@ -2,13 +2,25 @@
 
 #include "Formulario_Registro.h"
 
-Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m)
+Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo)
 {
  	this->parent = parent;
 	ui.setupUi(this);
 	this->model = m;
 	this->index = 0;
-	this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
+	if(!nuevo)
+	{
+			this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
+	}
+	else
+	{
+		string titulo = "Registro " +  boost::lexical_cast<string>( index );
+	 	QString aux(titulo.c_str());
+	 	ui.GB_Registro->setTitle(aux);
+	 	persona p;
+	 	this->model->InsertarPersona(this->model->getNumFicheros()-1,p);
+	}
+
 
 }
 

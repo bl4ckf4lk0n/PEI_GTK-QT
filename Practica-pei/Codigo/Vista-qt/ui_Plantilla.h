@@ -1,14 +1,14 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Plantilla.ui'
 **
-** Created: Thu May 9 17:14:11 2013
+** Created: Thu May 9 17:14:49 2013
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
 
-#ifndef PLANTILLA_H
-#define PLANTILLA_H
+#ifndef UI_PLANTILLA_H
+#define UI_PLANTILLA_H
 
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
@@ -146,4 +146,4 @@ namespace Ui {
 
 QT_END_NAMESPACE
 
-#endif // PLANTILLA_H
+#endif // UI_PLANTILLA_H
