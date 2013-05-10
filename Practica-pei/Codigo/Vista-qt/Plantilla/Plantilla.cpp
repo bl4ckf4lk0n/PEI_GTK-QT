@@ -94,7 +94,16 @@ void Plantilla::on_actionGuardar_triggered()
 {
     if(this->ui.tabWidget->currentIndex() != -1)
     {
-        model.GuardarEnFichero(this->ui.tabWidget->currentIndex());
+        if(model.ObtenerRuta(this->ui.tabWidget->currentIndex()) != "")
+        {
+            cout<<model.ObtenerRuta(this->ui.tabWidget->currentIndex())<<endl;
+            model.GuardarEnFichero(this->ui.tabWidget->currentIndex());
+        }
+        else
+        {
+            this->on_actionGuardar_como_triggered();
+        }
+
     }
 }
 
@@ -120,34 +129,12 @@ void Plantilla::on_actionGuardar_como_triggered()
 
 void Plantilla::on_actionNuevo_archivo_triggered()
 {
-    QString filename = this->NuevoArchivo();
+    model.NuevoArchivo();
 
-    if(filename != "")
-    {
-        QStringList list = filename.split('/');
-
-        this->NuevaPestanya(list[list.count()-1],model.getNumFicheros()-1,true);
-
-         model.GuardarEnFichero(model.getNumFicheros()-1);       
-    }
+    this->NuevaPestanya("Nuevo archivo",model.getNumFicheros()-1,true);   
 
 }
 
-QString Plantilla::NuevoArchivo()
-{
-    QString filename = QFileDialog::getSaveFileName( 
-    this, 
-    tr("Nuevo archivo"), 
-    QDir::currentPath(), 
-    tr("Document files (*.txt);;All files (*.*)") );
-
-    if( !filename.isNull() )
-    {
-      model.NuevoArchivo(filename.toStdString());
-      return filename;
-    }
-    return "";   
-}
 
 void Plantilla::on_actionBuscar_triggered()
 {

@@ -31,7 +31,7 @@ public:
 	//Funciones usuario
 	void GuardarEnFichero(int pos);
 	void GuardarComo(string fich, int pos);
-	int NuevoArchivo(string fich);
+	int NuevoArchivo();
 	int Buscar(int pos,int exacta, int And, string nom,string dir,string codpostal,string tel, string pob,string email);
 	void BorrarPersona(int pos,int id);
 	void InsertarPersona(int pos, persona p);
@@ -39,6 +39,7 @@ public:
 	void EliminarFichero(int pos);
 	persona MostrarPersona(int pos,int num);
 	persona* ObtenerReferenciaPersona(int pos,int num);
+	string ObtenerRuta(int pos);
 
 private:
 	std::vector<std::vector<persona>> listaPersonas;

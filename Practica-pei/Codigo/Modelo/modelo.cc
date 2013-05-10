@@ -29,7 +29,11 @@ modelo& modelo::operator=(const modelo& mod)
 void modelo::GuardarEnFichero(int pos)
 {
 	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
-	fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
+	if(listaRutas[pos] != "")
+	{
+		int ruta = fichero.obtenerPosicion(listaRutas[pos]);
+		fichero.escribirVectorPersonas(ruta,this->listaPersonas[pos]);		
+	}
 }
 
 void modelo::GuardarComo(string fich, int pos)
@@ -38,13 +42,14 @@ void modelo::GuardarComo(string fich, int pos)
 	int f = fichero.newFile(fich);
 	fichero.escribirVectorPersonas(f,this->listaPersonas[pos]);
 	fichero.modificarFichero(fich,pos);
+	this->listaRutas[pos] = fich;
 }
 
-int modelo::NuevoArchivo(string fich)
+int modelo::NuevoArchivo()
 {
-	int f = fichero.newFile(fich);
 	std::vector<persona> nuevaLista;
 	listaPersonas.push_back(nuevaLista);
+	listaRutas.push_back("");
 }
 
 /*
@@ -326,6 +331,7 @@ int modelo::Buscar(int pos,int exacta, int And, string nom,string dir,string cod
 	if(resultados.size() > 0)
 	{
 		this->listaPersonas.push_back(resultados);
+		this->listaRutas.push_back("");
 		return listaPersonas.size()-1;
 	}
 	else
@@ -345,16 +351,24 @@ void modelo::InsertarPersona(int pos,persona p)
 	listaPersonas[pos].push_back(p);
 }
 
+
 void modelo::LeerFichero(string file)
 {
 	int pos = this->fichero.add(file);
 	this->listaPersonas.push_back(fichero.getPersonas(pos));
+	this->listaRutas.push_back(file);
 }
 
 void modelo::EliminarFichero(int pos)
 {
+	if(listaRutas[pos] != "")
+	{
+		int ruta = fichero.obtenerPosicion(listaRutas[pos]);
+		fichero.removeFile(ruta);		
+	}
+
 	listaPersonas.erase(listaPersonas.begin()+pos);
-	fichero.removeFile(pos);
+	listaRutas.erase(listaRutas.begin()+pos);
 }
 
 persona modelo::MostrarPersona(int pos,int num)
@@ -382,4 +396,9 @@ persona* modelo::ObtenerReferenciaPersona(int pos,int num)
 		//Lanzar excepción
 		return &listaPersonas[pos][0];
 	}
+}
+
+string modelo::ObtenerRuta(int pos)
+{
+	return listaRutas[pos];
 }

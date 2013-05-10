@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Formulario_Busqueda.h'
 **
-** Created: Fri May 10 11:14:43 2013
+** Created: Fri May 10 12:06:07 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!

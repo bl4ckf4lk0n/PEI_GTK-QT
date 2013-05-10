@@ -25,6 +25,7 @@ public:
 	void removeFile(int pos);
 	vector<string> getFicheros();
 	void modificarFichero(string file,int pos);
+	int obtenerPosicion(string file);
 
 
 	vector<persona> getPersonas(int indiceFichero);

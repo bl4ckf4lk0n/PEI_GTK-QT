@@ -1,5 +1,5 @@
 
-NOMBRE sg
+NOMBRE sgcdc
 DIRECCION sdgsd
 POBLACION gsdgs
 CPOSTAL gsdgsdg

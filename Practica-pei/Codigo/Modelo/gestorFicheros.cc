@@ -175,3 +175,14 @@ void gestorFicheros::modificarFichero(string file,int pos)
 {
 	files[pos] = file;
 }
+
+int gestorFicheros::obtenerPosicion(string file)
+{
+	for(int i = 0; i<files.size(); i++ )
+	{
+		if(files[i] == file)
+		{
+			return i;
+		}
+	}
+}
