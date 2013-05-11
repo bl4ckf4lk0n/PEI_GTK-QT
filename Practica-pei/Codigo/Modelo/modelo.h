@@ -4,6 +4,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/regex.hpp>
+#include <boost/regex.hpp>
+#include <boost/lexical_cast.hpp>
 #include "persona.h"
 #include "gestorFicheros.h"
 using namespace std;
@@ -27,16 +31,19 @@ public:
 	//Funciones usuario
 	void GuardarEnFichero(int pos);
 	void GuardarComo(string fich, int pos);
-	void Buscar(/*Datos de busqueda (Por definir)*/);
+	int NuevoArchivo();
+	int Buscar(int pos,int exacta, int And, string nom,string dir,string codpostal,string tel, string pob,string email);
 	void BorrarPersona(int pos,int id);
 	void InsertarPersona(int pos, persona p);
 	void LeerFichero(string file);
 	void EliminarFichero(int pos);
 	persona MostrarPersona(int pos,int num);
 	persona* ObtenerReferenciaPersona(int pos,int num);
+	string ObtenerRuta(int pos);
 
 private:
 	std::vector<std::vector<persona>> listaPersonas;
+	std::vector<string> listaRutas;
 	gestorFicheros fichero;
 };
 

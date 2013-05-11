@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkWindow" id="Acerca_de">
+    <property name="can_focus">False</property>
+    <property name="border_width">10</property>
+    <property name="type">popup</property>
+    <property name="title" translatable="yes">Acerca de</property>
+    <property name="role">Acerca_de</property>
+    <property name="window_position">center</property>
+    <property name="type_hint">splashscreen</property>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkLabel" id="label1">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">&lt;b&gt;Autores&lt;/b&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label2">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Adrián Escolano Díaz y Víctor Guzmán Pedrajas</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label3">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">&lt;b&gt;Mejoras&lt;/b&gt;</property>
+            <property name="use_markup">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="label4">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="halign">start</property>
+            <property name="label" translatable="yes">Hemos hecho un blablabla y también un blobloblo así que esto se sale de la pantalla y tiene que ajustarse al contenido, pero como es un texto muy largo se sale demasiado y entonces la ventana lo recorta en plan feo poniendo punto suspensivos o también puede que se redimensione como está haciendo ahora, pero está redimensionando todos los campos a la vez, y eso no mola nada de nada de nada, ahora voy a poner intros a ver cómo salen :D
+Esto es otro párrafo
+
+Y esto otro más
+
+Hemos hecho un blablabla y también un blobloblo así que esto se sale de la pantalla y tiene que ajustarse al contenido, pero como es un texto muy largo se sale demasiado y entonces la ventana lo recorta en plan feo poniendo punto suspensivos o también puede que se redimensione como está haciendo ahora, pero está redimensionando todos los campos a la vez, y eso no mola nada de nada de nada ahora voy a copiar todo el texto otra vez para ver si se redimensiona correctamente...
+
+Hemos hecho un blablabla y también un blobloblo así que esto se sale de la pantalla y tiene que ajustarse al contenido, pero como es un texto muy largo se sale demasiado y entonces la ventana lo recorta en plan feo poniendo punto suspensivos o también puede que se redimensione como está haciendo ahora, pero está redimensionando todos los campos a la vez, y eso no mola nada de nada de nada ahora voy a copiar todo el texto otra vez para ver si se redimensiona correctamente...</property>
+            <property name="justify">fill</property>
+            <property name="wrap">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
