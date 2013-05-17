@@ -3,16 +3,18 @@
   <!-- interface-requires gtk+ 3.0 -->
   <object class="GtkWindow" id="Acerca_de">
     <property name="can_focus">False</property>
+    <property name="vexpand">True</property>
     <property name="border_width">10</property>
     <property name="type">popup</property>
     <property name="title" translatable="yes">Acerca de</property>
     <property name="role">Acerca_de</property>
     <property name="window_position">center</property>
-    <property name="type_hint">splashscreen</property>
+    <property name="type_hint">dialog</property>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="vexpand">True</property>
         <property name="orientation">vertical</property>
         <property name="spacing">5</property>
         <child>
