@@ -1,5 +1,5 @@
 COMP=g++
-OPC=-g -Wall
+OPC=-g -Wall -std=c++0x
 LINKS=-lboost_regex
 .PHONY=clean
 
@@ -8,7 +8,7 @@ objetos: gestorFicheros.o persona.o modelo.o
 pruebaGestor: gestorFicheros.o persona.o makefile pruebaGestor.cc
 	$(COMP) $(OPC) gestorFicheros.o persona.o pruebaGestor.cc $(LINKS)
 modelo.o: modelo.h modelo.cc gestorFicheros.o
-	$(COMP) $(OPC) -c -std=c++0x ./modelo.cc;
+	$(COMP) $(OPC) -c  ./modelo.cc;
 gestorFicheros.o: ./gestorFicheros.cc ./gestorFicheros.h ./persona.o ./fileException.h
 	$(COMP) $(OPC) -c ./gestorFicheros.cc;
 persona.o: ./persona.h ./persona.cc

@@ -1,5 +1,5 @@
 COMP=g++
-OPC=-g -Wall
+OPC=-g -Wall -std=c++0x
 LINKS=-lboost_regex
 .PHONY=clean
 
