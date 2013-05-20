@@ -18,11 +18,11 @@ int main (int argc, char **argv){
     Glib::RefPtr<Gtk::Builder> builder = Gtk::Builder::create_from_file("plantilla.glade");
     Glib::RefPtr<Gtk::Builder> builder_registro;
     Gtk::Window* pWindow = 0;
-  	builder->get_widget("window1", pWindow);
+  	builder->get_widget("ventana", pWindow);
   	/*Gtk::Alignment* pPag1 = 0;
   	builder->get_widget("pag1", pPag1);*/
   	Gtk::Notebook* pPestanas = 0;
-  	builder->get_widget("notebook1", pPestanas);
+  	builder->get_widget("grupo_pestanas", pPestanas);
   	
 
     for (int i = 0; i < 10; ++i)

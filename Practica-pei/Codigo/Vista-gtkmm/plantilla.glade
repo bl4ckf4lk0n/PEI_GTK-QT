@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkWindow" id="window1">
+  <object class="GtkWindow" id="ventana">
     <property name="can_focus">False</property>
     <child>
       <object class="GtkBox" id="box1">
@@ -125,8 +125,7 @@
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Acerca de...</property>
-                <property name="use_underline">True</property>
+                <property name="label" translatable="yes">AcercaDe</property>
               </object>
             </child>
           </object>
@@ -137,7 +136,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkNotebook" id="notebook1">
+          <object class="GtkNotebook" id="grupo_pestanas">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="vexpand">True</property>
