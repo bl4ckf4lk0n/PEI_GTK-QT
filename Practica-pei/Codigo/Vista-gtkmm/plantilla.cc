@@ -19,10 +19,10 @@ Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& 
 	builder_tab_con_boton->get_widget("contenedor", tabBoton);
 
 	std::vector<Gtk::Widget*> tabBoton_hijos = tabBoton->get_children();
-	Gtk::Label* nombre_pestana = dynamic_cast<Gtk::Label*>(tabBoton_hijos[0]);
+	Gtk::Label* nombre_pestana = static_cast<Gtk::Label*>(tabBoton_hijos[0]);
 	nombre_pestana->set_text("*archivo nuevo");
 
-	Gtk::Button* boton_pestana = dynamic_cast<Gtk::Button*>(tabBoton_hijos[1]);
+	Gtk::Button* boton_pestana = static_cast<Gtk::Button*>(tabBoton_hijos[1]);
 	boton_pestana->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(this,&Plantilla::on_button_quit_tab),subventana));
 
   	pPestanas->append_page(*subventana, *tabBoton);*/
@@ -30,17 +30,17 @@ Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& 
 	Gtk::MenuItem* menu = 0;
 	builder->get_widget("Archivo", menu);
   	std::vector<Gtk::Widget*> menu_hijos = menu->get_submenu()->get_children();
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::addTabNuevo));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[1])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::abrir));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[2])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::guardar));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[3])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::guardarComo));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[4])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::buscar));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[5])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::exportar));
-  	dynamic_cast<Gtk::MenuItem*>(menu_hijos[7])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::quit));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::addTabNuevo));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[1])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::abrir));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[2])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::guardar));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[3])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::guardarComo));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[4])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::buscar));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[5])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::exportar));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[7])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::quit));
 
   	builder->get_widget("Registro", menu);
   	menu_hijos = menu->get_submenu()->get_children();
-  	//dynamic_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::addTabNuevo));
+  	//static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::addTabNuevo));
 
 	builder->get_widget("fileChooser",dialogo);
 	dialogo->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
@@ -67,11 +67,11 @@ void Plantilla::addTab(std::string nombre){
   	builder_tab_con_boton->get_widget("contenedor", tabBoton);
 
 	std::vector<Gtk::Widget*> tabBoton_hijos = tabBoton->get_children();
-	Gtk::Label* nombre_pestana = dynamic_cast<Gtk::Label*>(tabBoton_hijos[0]);
+	Gtk::Label* nombre_pestana = static_cast<Gtk::Label*>(tabBoton_hijos[0]);
 	nombre_pestana->set_line_wrap(false);
 	nombre_pestana->set_text(nombre);
 
-	Gtk::Button* boton_pestana = dynamic_cast<Gtk::Button*>(tabBoton_hijos[1]);
+	Gtk::Button* boton_pestana = static_cast<Gtk::Button*>(tabBoton_hijos[1]);
 	boton_pestana->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(this,&Plantilla::on_button_quit_tab),subventana));
 
   	pPestanas->append_page(*subventana, *tabBoton);
