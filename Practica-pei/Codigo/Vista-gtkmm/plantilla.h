@@ -14,7 +14,8 @@ public:
 protected:
   //Signal handlers:
   void on_button_quit_tab(Gtk::Widget*);
-  void addTab();
+  void addTabNuevo();
+  void addTab(std::string);
   void quit();
   void abrir();
   void guardar();
@@ -22,10 +23,12 @@ protected:
   void buscar();
   void exportar();
   void nuevoRegistro();
+  void getArchivo();
 
   Glib::RefPtr<Gtk::Builder> builder;
  private:
  	Gtk::Notebook* pPestanas;
+  Gtk::FileChooserDialog* dialogo;
 };
 
 #endif //GTKMM_PLANTILLA_H
