@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include "../Modelo/modelo.h"
+#include "nuevo.h"
 
 class Plantilla : public Gtk::Window
 {

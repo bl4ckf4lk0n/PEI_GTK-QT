@@ -1,7 +1,7 @@
 COMP=g++
 OPC=-g -Wall -std=c++0x `pkg-config gtkmm-3.0 --cflags`
 LINKS=`pkg-config gtkmm-3.0 --libs`
-OBJ=formulario_registro.o formulario_busqueda.o plantilla.o 
+OBJ=formulario_registro.o formulario_busqueda.o plantilla.o nuevo.o
 .PHONY=clean
 
 all: $(OBJ) main minimain
@@ -12,6 +12,8 @@ formulario_registro.o: formulario_registro.h formulario_registro.cc
 	$(COMP) $(OPC) formulario_registro.cc -c
 formulario_busqueda.o: formulario_busqueda.h formulario_busqueda.cc
 	$(COMP) $(OPC) formulario_busqueda.cc -c
+nuevo.o: nuevo.h nuevo.cc
+	$(COMP) $(OPC) nuevo.cc -c
 main:  $(OBJ) main.cc
 	$(COMP) $(OPC) $(OBJ) main.cc $(LINKS) -o main
 minimain: minimain.cc

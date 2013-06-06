@@ -40,7 +40,7 @@ Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& 
 
   	builder->get_widget("Registro", menu);
   	menu_hijos = menu->get_submenu()->get_children();
-  	//static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::addTabNuevo));
+  	static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::nuevoRegistro));
 
 	builder->get_widget("fileChooser",dialogo);
 	dialogo->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
@@ -179,13 +179,6 @@ void Plantilla::guardarComo(){
 		}
 	}
 	dialogo->hide();
-/*
-    if( !filename.isNull() )
-    {
-      model.GuardarComo(filename.toStdString(),this->ui.tabWidget->currentIndex());
-      QStringList list = filename.split('/');
-      ui.tabWidget->setTabText(this->ui.tabWidget->currentIndex(),list[list.count()-1]);
-    }*/
 }
 
 void Plantilla::buscar(){
@@ -198,6 +191,15 @@ void Plantilla::exportar(){
 
 void Plantilla::nuevoRegistro(){
 	cout<<"Función nuevoRegistro, debe abrir un diálogo para crear uno nuevo, y luego guardarlo en el archivo actual ..."<<endl;
+	Glib::RefPtr<Gtk::Builder> builder_nuevo = Gtk::Builder::create_from_file("nuevo.glade");
+	FormularioNuevo* dialog = 0;
+	builder_nuevo->get_widget_derived("ventana_nuevo",dialog);
+	dialog->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	
+	int result = dialog->run();
+	dialog->hide();
+	if(result == Gtk::RESPONSE_OK)
+		mod.InsertarPersona(pPestanas->get_current_page(), dialog->getNuevaPersona());
 }
 
 void Plantilla::quit(){
