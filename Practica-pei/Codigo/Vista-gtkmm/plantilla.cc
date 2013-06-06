@@ -138,29 +138,16 @@ void Plantilla::guardarComo(){
 	dialogo->set_modal(true);
 	int result = dialogo->run();
 	string archivo = "";
-	switch(result)
-	{
-	case(Gtk::RESPONSE_OK):
-		{
+	if(result == Gtk::RESPONSE_OK){
 			archivo = dialogo->get_filename();
 		  	cout << "archivo selecccionado: " << archivo << endl;
 		  	mod.GuardarComo(archivo,pPestanas->get_current_page());
 
 		  	// cambiamos el nombre de la pestaña al nombre del archivo
   			static_cast<Gtk::Label*>(static_cast<Gtk::Box*>(pPestanas->get_tab_label(*(pPestanas->get_children()[0])))->get_children()[0])->set_text(archivo);
-		  	break;
 		}
-	case(Gtk::RESPONSE_CANCEL):
-		{
-		  cout << "Apertura cancelada" << endl;
-		  break;
-		}
-	default:
-		{
-		  cout << "Ha ocurrido algo extraño" << endl;
-		  break;
-		}
-	}
+	
+	
 	dialogo->hide();
 }
 
@@ -187,6 +174,16 @@ void Plantilla::buscar(){
 
 void Plantilla::exportar(){
 	cout<<"Función Exportar..."<<endl;
+	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_SAVE);
+	dialogo->set_modal(true);
+	int result = dialogo->run();
+	string archivo = "";
+	if(result == Gtk::RESPONSE_OK){
+		archivo = dialogo->get_filename();
+	  	cout << "archivo selecccionado: " << archivo << endl;
+	  	mod.ExportarCSV(archivo,pPestanas->get_current_page());
+	}
+	dialogo->hide();
 }
 
 void Plantilla::nuevoRegistro(){
