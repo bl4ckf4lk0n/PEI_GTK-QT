@@ -6,14 +6,49 @@ FormularioRegistro::FormularioRegistro(BaseObjectType* cobject, const Glib::RefP
 		Gtk::Widget* subventana = 0;
 		builder->get_widget("contenedor_principal", subventana);
 		index = 0;
-		Gtk::Button* bt_adelante,* bt_atras,* bt_modificar;
+		Gtk::Button* bt_adelante,* bt_atras,* bt_modificar,* bt_borrar;
 		builder->get_widget("bt_adelante",bt_adelante);
 		builder->get_widget("bt_atras",bt_atras);
 		builder->get_widget("ModificarRegistro",bt_modificar);
+		builder->get_widget("BorrarRegistro",bt_borrar);
+
 		bt_adelante->signal_clicked().connect(sigc::mem_fun(this,&FormularioRegistro::on_btn_adelante_clicked));
 		bt_atras->signal_clicked().connect(sigc::mem_fun(this,&FormularioRegistro::on_btn_atras_clicked));
 		bt_modificar->signal_clicked().connect(sigc::mem_fun(this,&FormularioRegistro::on_btn_ModRegistro_clicked));
+		bt_borrar->signal_clicked().connect(sigc::mem_fun(this,&FormularioRegistro::on_btn_BorrarRegistro_clicked));
 
+}
+
+void FormularioRegistro::MostrarPersonaVacia(){
+	if(index < 0){
+		persona p;
+		mod->InsertarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),p);
+		index = 0;
+	}
+
+	Gtk::Entry* tb_nombre;
+	builder->get_widget("tb_nombre",tb_nombre);
+	tb_nombre->set_text("");
+
+	Gtk::Entry* tb_dir;
+	builder->get_widget("tb_direccion",tb_dir);
+	tb_dir->set_text("");
+
+	Gtk::Entry* tb_poblacion;
+	builder->get_widget("tb_poblacion",tb_poblacion);
+	tb_poblacion->set_text("");
+
+	Gtk::Entry* tb_codigopostal;
+	builder->get_widget("tb_codigopostal",tb_codigopostal);
+	tb_codigopostal->set_text("");
+
+	Gtk::Entry* tb_telefono;
+	builder->get_widget("tb_telefono",tb_telefono);
+	tb_telefono->set_text("");
+
+	Gtk::Entry* tb_correo;
+	builder->get_widget("tb_correo",tb_correo);
+	tb_correo->set_text("");
 }
 
 void FormularioRegistro::MostrarPersona(persona pers){
@@ -52,9 +87,7 @@ void FormularioRegistro::on_btn_adelante_clicked(){
 	}else{
 		cerr<<"Error en el valor"<<endl;
 	}
-
-	persona personaFinal = mod->MostrarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),index);
-	MostrarPersona(personaFinal);
+	MostrarPersona();
 }
 void FormularioRegistro::on_btn_atras_clicked(){
 	Gtk::SpinButton* sp_atras;
@@ -66,9 +99,7 @@ void FormularioRegistro::on_btn_atras_clicked(){
 	}else{
 		cerr<<"Error en el valor"<<endl;
 	}
-
-	persona personaFinal = mod->MostrarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),index);
-	MostrarPersona(personaFinal);
+	MostrarPersona();
 }
 
 void FormularioRegistro::on_btn_ModRegistro_clicked(){
@@ -96,4 +127,27 @@ void FormularioRegistro::on_btn_ModRegistro_clicked(){
 	Gtk::Entry* tb_correo;
 	builder->get_widget("tb_correo",tb_correo);
 	p->setEmail(tb_correo->get_text());
+}
+
+void FormularioRegistro::on_btn_BorrarRegistro_clicked(){
+	if(mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page()) > 0){
+		mod->BorrarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),index);
+		if(index == mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page()))
+			index--;
+		if(index != -1)
+			MostrarPersona();
+		else{
+			MostrarPersonaVacia();
+		}
+
+	}
+}
+
+void FormularioRegistro::MostrarPersona(){
+	if(mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page()) > 0){
+		persona personaFinal = mod->MostrarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),index);
+		MostrarPersona(personaFinal);
+	}else{
+		MostrarPersonaVacia();
+	}
 }

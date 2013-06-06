@@ -2,8 +2,12 @@
 #define GTKMM_PLANTILLA_H
 
 #include <gtkmm.h>
+#include <iostream>
 #include "../Modelo/modelo.h"
+#include "formulario_registro.h"
 #include "nuevo.h"
+#include "formulario_busqueda.h"
+
 
 class Plantilla : public Gtk::Window
 {

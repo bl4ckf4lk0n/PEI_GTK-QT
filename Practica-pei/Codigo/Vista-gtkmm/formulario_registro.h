@@ -14,14 +14,17 @@ public:
   ~FormularioRegistro(){};
   void setModelo(modelo* _mod){mod = _mod;}
   void MostrarPersona(persona p);
+  
+  void MostrarPersonaVacia();
 
 protected:
   //Signal handlers:
 	void on_btn_adelante_clicked();
 	void on_btn_atras_clicked();
 	void on_btn_ModRegistro_clicked();
+  void on_btn_BorrarRegistro_clicked();
 
-	
+	void MostrarPersona();
   	Glib::RefPtr<Gtk::Builder> builder;
  private:
  	modelo* mod;

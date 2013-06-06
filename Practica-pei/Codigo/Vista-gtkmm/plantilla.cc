@@ -1,31 +1,11 @@
 #include "plantilla.h"
-#include "formulario_registro.h"
-#include <iostream>
+
 
 Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade)
 : Gtk::Window(cobject),
   builder(refGlade)
 {
 	Glib::RefPtr<Gtk::Builder> builder_tab_con_boton = Gtk::Builder::create_from_file("tab_con_boton.glade");
-	/*Glib::RefPtr<Gtk::Builder> builder_registro = Gtk::Builder::create_from_file("formulario_registro.glade");
-
-	FormularioRegistro* subventana = 0;
-	Gtk::Box* tabBoton = 0;
-	
-
-	
-  	
-  	builder_registro->get_widget_derived("contenedor_principal", subventana);
-	builder_tab_con_boton->get_widget("contenedor", tabBoton);
-
-	vector<Gtk::Widget*> tabBoton_hijos = tabBoton->get_children();
-	Gtk::Label* nombre_pestana = static_cast<Gtk::Label*>(tabBoton_hijos[0]);
-	nombre_pestana->set_text("*archivo nuevo");
-
-	Gtk::Button* boton_pestana = static_cast<Gtk::Button*>(tabBoton_hijos[1]);
-	boton_pestana->signal_clicked().connect(sigc::bind<Gtk::Widget*>(sigc::mem_fun(this,&Plantilla::on_button_quit_tab),subventana));
-
-  	pPestanas->append_page(*subventana, *tabBoton);*/
 	builder->get_widget("grupo_pestanas", pPestanas);
 	Gtk::MenuItem* menu = 0;
 	builder->get_widget("Archivo", menu);
@@ -186,6 +166,23 @@ void Plantilla::guardarComo(){
 
 void Plantilla::buscar(){
 	cout<<"Función buscar..."<<endl;
+	if(pPestanas->get_n_pages() > 0){
+		Glib::RefPtr<Gtk::Builder> builder_busqueda = Gtk::Builder::create_from_file("formulario_busqueda.glade");
+		FormularioBusqueda* dialog = 0;
+		builder_busqueda->get_widget_derived("ventana_busqueda",dialog);
+		dialog->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+		
+		int result = dialog->run();
+		dialog->hide();
+		if(result == Gtk::RESPONSE_OK){
+			int buscar = mod.Buscar(pPestanas->get_current_page(),dialog->getExacta(), dialog->getAnd(), dialog->getNombre(),dialog->getDireccion(),dialog->getCodigoPostal(),dialog->getTelefono(), dialog->getPoblacion(),dialog->getCorreo());
+			if(buscar > 0)
+				addTab("Resultados de búsqueda");
+			else
+				cout<<"Error en la búsqueda"<<endl;
+		}
+			
+	}
 }
 
 void Plantilla::exportar(){
