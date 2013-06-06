@@ -186,3 +186,25 @@ int gestorFicheros::obtenerPosicion(string file)
 		}
 	}
 }
+
+void gestorFicheros::exportarCSV(string file,vector<persona> nuevasPersonas)
+{
+	ofstream salida;
+	salida.open(file.c_str());
+
+	if(salida.is_open()){
+		salida<<"NOMBRE,DIRECCION,POBLACION,CPOSTAL,TELEFONO,EMAIL"<<endl;
+
+		for(int i = 0; i < nuevasPersonas.size(); i++){
+
+			salida	<<"\"" <<nuevasPersonas[i].getNombre()<<"\""
+					<<",\""<<nuevasPersonas[i].getDireccion()<<"\""
+					<<",\""<<nuevasPersonas[i].getPoblacion()<<"\""
+					<<",\""<<nuevasPersonas[i].getCodPostal()<<"\""
+					<<",\""<<nuevasPersonas[i].getTelefono()<<"\""
+					<<",\""<<nuevasPersonas[i].getEmail()<<"\""<<endl;
+		}
+
+		salida.close();
+	}
+}

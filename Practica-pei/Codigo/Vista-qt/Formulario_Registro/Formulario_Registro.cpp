@@ -8,9 +8,19 @@ Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo
 	ui.setupUi(this);
 	this->model = m;
 	this->index = 0;
+	val_SB_Adelante_Anterior = 1;
+	val_SB_Atras_Anterior = 0;
 	if(!nuevo)
 	{
 			this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
+
+			ui.SB_Adelante->setMaximum(100);
+			ui.SB_Adelante->setMinimum(0);
+			ui.SB_Adelante->setValue(1);
+
+			ui.SB_Atras->setMaximum(100);
+			ui.SB_Atras->setMinimum(0);
+			ui.SB_Atras->setValue(0);
 	}
 	else
 	{
@@ -52,19 +62,35 @@ void Formulario_Registro::MostrarPersona(persona p)
 
 void Formulario_Registro::on_Btn_Adelante_clicked()
 {
-	if(this->index+1 < this->model->getNumPersonas(this->parent->currentIndex()))
+	int incremento = ui.SB_Adelante->value();
+	if(this->index+incremento < this->model->getNumPersonas(this->parent->currentIndex()))
 	{
-		this->index++;
+		this->index+=incremento;
 		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+
+		if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
+		{
+			//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
+			ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
+		}
+
 	}
 }
 
 void Formulario_Registro::on_Btn_Atras_clicked()
 {
-	if(this->index-1 >= 0)
+	int decremento = ui.SB_Atras->value();
+	if(this->index-decremento >= 0)
 	{
-		this->index--;
+		this->index-=decremento;
 		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+
+
+		if(this->index-ui.SB_Atras->value() < 0)
+		{
+			ui.SB_Atras->setValue(this->index);
+		}
+
 	}
 }
 
@@ -90,6 +116,19 @@ void Formulario_Registro::on_Btn_BorrarRegistro_clicked()
 			this->index--;
 		}		
 		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+
+
+		if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
+		{
+			//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
+			ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
+		}
+
+		if(this->index-ui.SB_Atras->value()<0)
+		{
+			ui.SB_Atras->setValue(this->index);
+		}
+
 	}
 	else
 	{
@@ -97,4 +136,30 @@ void Formulario_Registro::on_Btn_BorrarRegistro_clicked()
 	}
 
 
+}
+
+void Formulario_Registro::on_SB_Adelante_valueChanged(int val)
+{
+
+	if(this->index+val < this->model->getNumPersonas(this->parent->currentIndex()))
+	{
+		val_SB_Adelante_Anterior = val;
+	}
+	else
+	{
+		ui.SB_Adelante->setValue(this->val_SB_Adelante_Anterior);
+	}
+}
+
+void Formulario_Registro::on_SB_Atras_valueChanged(int val)
+{
+
+	if(this->index-val >= 0)
+	{
+		val_SB_Atras_Anterior = val;
+	}
+	else
+	{
+		ui.SB_Atras->setValue(this->val_SB_Atras_Anterior);
+	}
 }

@@ -150,3 +150,20 @@ void Plantilla::on_actionAcerca_triggered()
     Acerca_de* acerca = new Acerca_de(this);
     acerca->exec();
 }
+
+void Plantilla::on_actionExportar_triggered()
+{
+    if(this->ui.tabWidget->currentIndex() != -1)
+    {
+        QString filename = QFileDialog::getSaveFileName( 
+        this, 
+        tr("Exportar"), 
+        QDir::currentPath(), 
+        tr("Document files (*.csv);;All files (*.*)") );
+
+        if( !filename.isNull() )
+        {
+          model.ExportarCSV(filename.toStdString(),this->ui.tabWidget->currentIndex());
+        }        
+    }
+}

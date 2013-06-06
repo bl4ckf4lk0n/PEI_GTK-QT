@@ -17,6 +17,7 @@ public:
  Formulario_Busqueda(QMainWindow* parent,QTabWidget* tab,modelo* m,int pos);
 
 private slots:
+ /*Realiza una llamada al metodo de buscar del modelo pasandoles todos los datos para la búsqueda*/
  void on_Btn_Buscar_clicked();
 
 private:
@@ -26,6 +27,7 @@ private:
  modelo* model;
  int pestanya;
 
+ /*Abre una nueva pestaña con los resultados de la búsqueda*/
  void NuevaPestanya(QString nomPestanya,int pos,bool nuevo);
 };
 
