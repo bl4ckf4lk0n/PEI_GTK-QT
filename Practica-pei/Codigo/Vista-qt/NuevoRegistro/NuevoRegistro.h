@@ -14,6 +14,8 @@ public:
  NuevoRegistro(QMainWindow* parent,modelo* m,int pos);
 
 private slots:
+
+ /*Guarda un nuevo registro en la pestaña correspondiente, añadiendola al vector de personas correspondiente del modelo*/
  void on_Btn_GuardarRegistro_clicked();
 
 private:

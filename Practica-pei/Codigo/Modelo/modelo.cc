@@ -25,6 +25,7 @@ modelo& modelo::operator=(const modelo& mod)
 	return *this;
 }
 
+
 void modelo::GuardarEnFichero(int pos)
 {
 	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
@@ -54,7 +55,7 @@ int modelo::NuevoArchivo()
 /*
 	Devuelve un vector de personas filtrado por los campos especificados
 */
-int modelo::Buscar(int pos,int exacta, int And, string nom,string dir,string codpostal,string tel, string pob,string email)
+int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string codpostal,string tel, string pob,string email)
 {
 	std::vector<persona> resultados;
 
@@ -400,4 +401,9 @@ persona* modelo::ObtenerReferenciaPersona(int pos,int num)
 string modelo::ObtenerRuta(int pos)
 {
 	return listaRutas[pos];
+}
+
+void modelo::ExportarCSV(string fich, int pos)
+{
+	fichero.exportarCSV(fich,this->listaPersonas[pos]);
 }
