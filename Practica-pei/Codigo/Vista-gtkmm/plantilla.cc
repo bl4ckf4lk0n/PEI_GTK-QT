@@ -53,6 +53,8 @@ void Plantilla::addTabNuevo(){
 	mod.NuevoArchivo();
 	string aux = "";
 	addTab(aux);
+	persona p;
+	mod.InsertarPersona(pPestanas->get_current_page(),p);
 }
 
 void Plantilla::addTab(string nombre){
@@ -100,6 +102,7 @@ void Plantilla::on_button_quit_tab(Gtk::Widget* hijo)
 
 void Plantilla::abrir(){
 	cout<<"Función Abrir..."<<endl;
+	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialogo->set_modal(true);
 	int result = dialogo->run();
 	string archivo = "";
@@ -135,10 +138,54 @@ void Plantilla::getArchivo(){
 
 void Plantilla::guardar(){
 	cout<<"Función Guardar..."<<endl;
+	if(mod.ObtenerRuta(pPestanas->get_current_page()) != "")
+    {
+        cout<<mod.ObtenerRuta(pPestanas->get_current_page())<<endl;
+        mod.GuardarEnFichero(pPestanas->get_current_page());
+    }
+    else
+    {
+        guardarComo();
+    }
 }
 
 void Plantilla::guardarComo(){
 	cout<<"Función guardar como..."<<endl;
+	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_SAVE);
+	dialogo->set_modal(true);
+	int result = dialogo->run();
+	string archivo = "";
+	switch(result)
+	{
+	case(Gtk::RESPONSE_OK):
+		{
+			archivo = dialogo->get_filename();
+		  	cout << "archivo selecccionado: " << archivo << endl;
+		  	mod.GuardarComo(archivo,pPestanas->get_current_page());
+
+		  	// cambiamos el nombre de la pestaña al nombre del archivo
+  			static_cast<Gtk::Label*>(static_cast<Gtk::Box*>(pPestanas->get_tab_label(*(pPestanas->get_children()[0])))->get_children()[0])->set_text(archivo);
+		  	break;
+		}
+	case(Gtk::RESPONSE_CANCEL):
+		{
+		  cout << "Apertura cancelada" << endl;
+		  break;
+		}
+	default:
+		{
+		  cout << "Ha ocurrido algo extraño" << endl;
+		  break;
+		}
+	}
+	dialogo->hide();
+/*
+    if( !filename.isNull() )
+    {
+      model.GuardarComo(filename.toStdString(),this->ui.tabWidget->currentIndex());
+      QStringList list = filename.split('/');
+      ui.tabWidget->setTabText(this->ui.tabWidget->currentIndex(),list[list.count()-1]);
+    }*/
 }
 
 void Plantilla::buscar(){

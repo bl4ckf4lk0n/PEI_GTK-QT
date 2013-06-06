@@ -20,6 +20,26 @@ void FormularioRegistro::MostrarPersona(persona pers){
 	Gtk::Entry* tb_nombre;
 	builder->get_widget("tb_nombre",tb_nombre);
 	tb_nombre->set_text(pers.getNombre());
+
+	Gtk::Entry* tb_dir;
+	builder->get_widget("tb_direccion",tb_dir);
+	tb_dir->set_text(pers.getDireccion());
+
+	Gtk::Entry* tb_poblacion;
+	builder->get_widget("tb_poblacion",tb_poblacion);
+	tb_poblacion->set_text(pers.getPoblacion());
+
+	Gtk::Entry* tb_codigopostal;
+	builder->get_widget("tb_codigopostal",tb_codigopostal);
+	tb_codigopostal->set_text(pers.getCodPostal());
+
+	Gtk::Entry* tb_telefono;
+	builder->get_widget("tb_telefono",tb_telefono);
+	tb_telefono->set_text(pers.getTelefono());
+
+	Gtk::Entry* tb_correo;
+	builder->get_widget("tb_correo",tb_correo);
+	tb_correo->set_text(pers.getEmail());
 }
 
 void FormularioRegistro::on_btn_adelante_clicked(){
