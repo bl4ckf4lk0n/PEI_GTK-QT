@@ -11,5 +11,5 @@ FormularioRegistro::FormularioRegistro(BaseObjectType* cobject, const Glib::RefP
 void FormularioRegistro::MostrarPersona(persona pers){
 	Gtk::Entry* tb_nombre;
 	builder->get_widget("tb_nombre",tb_nombre);
-	tb_nombre->set_text("AAA");
+	tb_nombre->set_text(pers.getNombre());
 }
