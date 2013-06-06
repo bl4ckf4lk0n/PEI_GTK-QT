@@ -112,7 +112,6 @@
                       <object class="GtkEntry" id="tb_nombre">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -140,7 +139,6 @@
                       <object class="GtkEntry" id="tb_codigopostal">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -155,7 +153,6 @@
                       <object class="GtkEntry" id="tb_direccion">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -170,7 +167,6 @@
                       <object class="GtkEntry" id="tb_telefono">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -185,7 +181,6 @@
                       <object class="GtkEntry" id="tb_poblacion">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -200,7 +195,6 @@
                       <object class="GtkEntry" id="tb_correo">
                         <property name="visible">True</property>
                         <property name="can_focus">True</property>
-                        <property name="editable">False</property>
                         <property name="invisible_char">•</property>
                         <property name="invisible_char_set">True</property>
                       </object>
@@ -289,7 +283,7 @@
             <property name="can_focus">False</property>
             <property name="homogeneous">True</property>
             <child>
-              <object class="GtkButton" id="GuardarRegistro">
+              <object class="GtkButton" id="ModificarRegistro">
                 <property name="label" translatable="yes">Modificar Registro</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -308,7 +302,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button2">
+              <object class="GtkButton" id="BorrarRegistro">
                 <property name="label" translatable="yes">Borrar registro</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
@@ -344,7 +338,7 @@
         <property name="valign">center</property>
         <property name="orientation">vertical</property>
         <child>
-          <object class="GtkSpinButton" id="sp_delante">
+          <object class="GtkSpinButton" id="sp_adelante">
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="invisible_char">•</property>
@@ -357,7 +351,7 @@
           </packing>
         </child>
         <child>
-          <object class="GtkButton" id="button3">
+          <object class="GtkButton" id="bt_adelante">
             <property name="label" translatable="yes">-&gt;</property>
             <property name="use_action_appearance">False</property>
             <property name="width_request">70</property>

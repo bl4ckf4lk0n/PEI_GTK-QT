@@ -2,8 +2,10 @@
 #define GTKMM_FORM_REGISTRO_H
 
 #include <gtkmm.h>
+#include <iostream>
 #include "../Modelo/modelo.h"
 
+using namespace std;
 
 class FormularioRegistro : public Gtk::Box
 {
@@ -15,7 +17,9 @@ public:
 
 protected:
   //Signal handlers:
-
+	void on_btn_adelante_clicked();
+	void on_btn_atras_clicked();
+	void on_btn_ModRegistro_clicked();
 
 	
   	Glib::RefPtr<Gtk::Builder> builder;

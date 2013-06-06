@@ -15,7 +15,7 @@ protected:
   //Signal handlers:
   void on_button_quit_tab(Gtk::Widget*);
   void addTabNuevo();
-  void addTab(std::string);
+  void addTab(string);
   void quit();
   void abrir();
   void guardar();
