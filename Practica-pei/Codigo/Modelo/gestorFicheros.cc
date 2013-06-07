@@ -47,6 +47,9 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 	std::vector<persona> retorno;
 
 	if(origen.is_open()){
+		if(origen.peek() == std::ifstream::traits_type::eof()){
+			throw fileException("[E] Archivo vacío");
+		}
 		string linea;
 		while (getline(origen, linea))
 		{
