@@ -51,6 +51,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 			throw fileException("[E] Archivo vacío");
 		}
 		string linea;
+		bool correcto = false;
 		while (getline(origen, linea))
 		{
 			boost::trim_left(linea);
@@ -117,13 +118,14 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 
 					persona nueva(nombre,direccion,poblacion,cod_postal,telefono,email);
 					retorno.push_back(nueva);
-
+					correcto = true;
 				}catch(ios_base::failure ex){
 					throw fileException("[E] Archivo con formato incorrecto");
 				}
-			}else{
-				throw fileException("[E] Archivo con formato incorrecto");
 			}
+		}
+		if(!correcto){
+			throw fileException("[E] Archivo con formato incorrecto");
 		}
 		origen.close();
 	}else{
