@@ -121,6 +121,8 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 				}catch(ios_base::failure ex){
 					throw fileException("[E] Archivo con formato incorrecto");
 				}
+			}else{
+				throw fileException("[E] Archivo con formato incorrecto");
 			}
 		}
 		origen.close();
