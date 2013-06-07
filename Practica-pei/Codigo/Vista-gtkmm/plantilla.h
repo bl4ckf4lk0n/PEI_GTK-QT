@@ -29,11 +29,14 @@ protected:
   void exportar();
   void nuevoRegistro();
   void getArchivo();
+  void acercaDe();
 
   Glib::RefPtr<Gtk::Builder> builder;
  private:
  	Gtk::Notebook* pPestanas;
   Gtk::FileChooserDialog* dialogo;
+  Gtk::Dialog* dialogo_acercaDe;
+  Gtk::Dialog* dialogo_confirmacion;
 };
 
 #endif //GTKMM_PLANTILLA_H

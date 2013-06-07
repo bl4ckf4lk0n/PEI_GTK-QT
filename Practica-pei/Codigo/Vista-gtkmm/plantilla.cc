@@ -22,6 +22,19 @@ Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& 
   	menu_hijos = menu->get_submenu()->get_children();
   	static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::nuevoRegistro));
 
+  	builder->get_widget("Ayuda", menu);
+  	menu_hijos = menu->get_submenu()->get_children();
+  	static_cast<Gtk::MenuItem*>(menu_hijos[0])->signal_activate().connect(sigc::mem_fun(this,&Plantilla::acercaDe));
+
+  	Glib::RefPtr<Gtk::Builder> builder_acerca_de = Gtk::Builder::create_from_file("Acerca_de.glade");
+	builder_acerca_de->get_widget("AcercaDe",dialogo_acercaDe);
+	dialogo_acercaDe->add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+
+	Glib::RefPtr<Gtk::Builder> builder_confirmacion = Gtk::Builder::create_from_file("estas_seguro.glade");
+	builder_confirmacion->get_widget("estasSeguro",dialogo_confirmacion);
+	dialogo_confirmacion->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	dialogo_confirmacion->add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
+
 	builder->get_widget("fileChooser",dialogo);
 	dialogo->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	dialogo->add_button("Seleccionar", Gtk::RESPONSE_OK);
@@ -68,18 +81,22 @@ void Plantilla::addTab(string nombre){
   	pPestanas->set_current_page(pPestanas->get_n_pages()-1);
 
   	if(nombre != ""){
-  		subventana->MostrarPersona(mod.MostrarPersona(pPestanas->get_current_page(),0));
+  		subventana->MostrarPersona();
   	}
 }
 
 void Plantilla::on_button_quit_tab(Gtk::Widget* hijo)
 {
-  int numpage = pPestanas->page_num(*hijo);
-  	if(numpage != -1){
-    	pPestanas->remove_page(numpage);
-    	mod.EliminarFichero(numpage);
-	}else{
-    	cout<<"Ha ocurrido un error, numpage es : "<<numpage<<endl;
+	int continuar = dialogo_confirmacion->run();
+	dialogo_confirmacion->hide();
+	if(continuar == Gtk::RESPONSE_OK){
+	  	int numpage = pPestanas->page_num(*hijo);
+	  	if(numpage != -1){
+	    	pPestanas->remove_page(numpage);
+	    	mod.EliminarFichero(numpage);
+		}else{
+	    	cout<<"Ha ocurrido un error, numpage es : "<<numpage<<endl;
+	  	}
   	}
 }
 
@@ -199,6 +216,11 @@ void Plantilla::nuevoRegistro(){
 		if(result == Gtk::RESPONSE_OK)
 			mod.InsertarPersona(pPestanas->get_current_page(), dialog->getNuevaPersona());
 	}
+}
+
+void Plantilla::acercaDe(){
+	dialogo_acercaDe->run();
+	dialogo_acercaDe->hide();
 }
 
 void Plantilla::quit(){

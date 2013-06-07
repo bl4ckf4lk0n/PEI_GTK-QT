@@ -13,7 +13,8 @@ public:
   FormularioRegistro(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
   ~FormularioRegistro(){};
   void setModelo(modelo* _mod){mod = _mod;}
-  void MostrarPersona(persona p);
+  void MostrarPersona();
+  
   
   void MostrarPersonaVacia();
 
@@ -23,12 +24,16 @@ protected:
 	void on_btn_atras_clicked();
 	void on_btn_ModRegistro_clicked();
   void on_btn_BorrarRegistro_clicked();
+  void on_tb_changed();
 
-	void MostrarPersona();
+	void MostrarPersona(persona p);
   	Glib::RefPtr<Gtk::Builder> builder;
  private:
  	modelo* mod;
  	int index;
+  Gtk::Dialog* dialogo_confirmacion;
+  bool modificado;
+  Gtk::Entry *tb_nombre,* tb_dir,* tb_poblacion,* tb_codigopostal,* tb_telefono,* tb_correo;
 };
 
 #endif //GTKMM_FORM_REGISTRO_H
