@@ -239,5 +239,9 @@ void Plantilla::acercaDe(){
 }
 
 void Plantilla::quit(){
- 	hide();
+	int continuar = dialogo_confirmacion->run();
+	dialogo_confirmacion->hide();
+	if(continuar == Gtk::RESPONSE_OK){
+	 	hide();
+	 }
  }
