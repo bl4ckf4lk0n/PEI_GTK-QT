@@ -176,15 +176,22 @@ void Plantilla::buscar(){
 		builder_busqueda->get_widget_derived("ventana_busqueda",dialog);
 		dialog->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 		
-		int result = dialog->run();
-		dialog->hide();
-		if(result == Gtk::RESPONSE_OK){
-			int buscar = mod.Buscar(pPestanas->get_current_page(),dialog->getExacta(), dialog->getAnd(), dialog->getNombre(),dialog->getDireccion(),dialog->getCodigoPostal(),dialog->getTelefono(), dialog->getPoblacion(),dialog->getCorreo());
-			if(buscar > 0)
-				addTab("Resultados de búsqueda");
-			else
-				cout<<"Error en la búsqueda"<<endl;
+		int result = 0;
+		int continuar = 0;
+		while(result != Gtk::RESPONSE_OK && continuar != Gtk::RESPONSE_OK){
+			result = dialog->run();
+			if(result == Gtk::RESPONSE_OK){
+				int buscar = mod.Buscar(pPestanas->get_current_page(),dialog->getExacta(), dialog->getAnd(), dialog->getNombre(),dialog->getDireccion(),dialog->getCodigoPostal(),dialog->getTelefono(), dialog->getPoblacion(),dialog->getCorreo());
+				if(buscar > 0)
+					addTab("Resultados de búsqueda");
+				else
+					cout<<"Error en la búsqueda"<<endl;
+			}else{
+				continuar = dialogo_confirmacion->run();
+				dialogo_confirmacion->hide();
+			}
 		}
+		dialog->hide();
 			
 	}
 }
@@ -211,10 +218,18 @@ void Plantilla::nuevoRegistro(){
 		builder_nuevo->get_widget_derived("ventana_nuevo",dialog);
 		dialog->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 		
-		int result = dialog->run();
+		int result = 0;
+		int continuar = 0;
+		while(result != Gtk::RESPONSE_OK && continuar != Gtk::RESPONSE_OK){
+			result = dialog->run();
+			if(result == Gtk::RESPONSE_OK){
+				mod.InsertarPersona(pPestanas->get_current_page(), dialog->getNuevaPersona());
+			}else{
+				continuar = dialogo_confirmacion->run();
+				dialogo_confirmacion->hide();
+			}
+		}
 		dialog->hide();
-		if(result == Gtk::RESPONSE_OK)
-			mod.InsertarPersona(pPestanas->get_current_page(), dialog->getNuevaPersona());
 	}
 }
 
