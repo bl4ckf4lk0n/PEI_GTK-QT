@@ -42,6 +42,7 @@ void modelo::GuardarComo(string fich, int pos)
 	int f = fichero.newFile(fich);
 	fichero.escribirVectorPersonas(f,this->listaPersonas[pos]);
 	fichero.modificarFichero(fich,pos);
+	fichero.removeFile(f);
 	this->listaRutas[pos] = fich;
 }
 
