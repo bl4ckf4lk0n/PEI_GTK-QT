@@ -155,6 +155,7 @@ void Plantilla::guardarComo(){
 	cout<<"Función guardar como..."<<endl;
 	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dialogo->set_modal(true);
+	dialogo->set_do_overwrite_confirmation (true);
 	int result = dialogo->run();
 	string archivo = "";
 	if(result == Gtk::RESPONSE_OK){
