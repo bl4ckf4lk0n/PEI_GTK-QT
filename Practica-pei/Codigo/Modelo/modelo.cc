@@ -39,10 +39,22 @@ void modelo::GuardarEnFichero(int pos)
 void modelo::GuardarComo(string fich, int pos)
 {
 	//Guardar lista de personas en un fichero mediante la clase gestorFicheros.
-	int f = fichero.newFile(fich);
-	fichero.escribirVectorPersonas(f,this->listaPersonas[pos]);
-	fichero.modificarFichero(fich,pos);
-	this->listaRutas[pos] = fich;
+	try{
+		int f = fichero.newFile(fich);
+		fichero.escribirVectorPersonas(f,this->listaPersonas[pos]);
+		fichero.modificarFichero(fich,pos);
+		this->listaRutas[pos] = fich;
+		fichero.removeFile(f);
+	}catch(fileException& e){
+		cerr<<e.what()<<endl;
+		cerr<<"0"<<endl;
+		fichero.modificarFichero(fich,pos);
+		cerr<<"1"<<endl;
+		fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
+		cerr<<"2"<<endl;
+		this->listaRutas[pos] = fich;
+		cerr<<"Se ha modificado el fichero que ya existia"<<endl;
+	}
 }
 
 int modelo::NuevoArchivo()
