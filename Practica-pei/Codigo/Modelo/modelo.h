@@ -10,6 +10,7 @@
 #include <boost/lexical_cast.hpp>
 #include "persona.h"
 #include "gestorFicheros.h"
+#include "fileException.h"
 using namespace std;
 
 

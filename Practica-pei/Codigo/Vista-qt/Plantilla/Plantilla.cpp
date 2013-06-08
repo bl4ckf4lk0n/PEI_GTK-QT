@@ -52,7 +52,20 @@ QString Plantilla::AbrirArchivo()
 
     if( !filename.isNull() )
     {
-      model.LeerFichero(filename.toStdString());
+      try
+      {
+            model.LeerFichero(filename.toStdString());
+      }
+      catch(fileException fexc)
+      {
+            QMessageBox mensajeError(this);
+            mensajeError.addButton(QMessageBox::Close);
+            mensajeError.setIcon(QMessageBox::Warning);
+            mensajeError.setText("El archivo seleccionado está mal formado");
+            mensajeError.exec();
+            return "";
+      }
+      
       return filename;
     }
     else

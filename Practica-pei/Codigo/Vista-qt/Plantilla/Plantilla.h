@@ -10,6 +10,7 @@
 #include "../NuevoRegistro/NuevoRegistro.h"
 #include "../Formulario_Busqueda/Formulario_Busqueda.h"
 #include "../Acerca_de/Acerca_de.h"
+#include "../../Modelo/fileException.h"
 using namespace std;
 
 class Plantilla : public QMainWindow

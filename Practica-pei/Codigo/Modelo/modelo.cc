@@ -355,7 +355,15 @@ void modelo::InsertarPersona(int pos,persona p)
 void modelo::LeerFichero(string file)
 {
 	int pos = this->fichero.add(file);
-	this->listaPersonas.push_back(fichero.getPersonas(pos));
+	try
+	{
+		this->listaPersonas.push_back(fichero.getPersonas(pos));
+	}
+	catch(fileException fexc)
+	{
+		throw fexc;
+	}
+	
 	this->listaRutas.push_back(file);
 }
 
