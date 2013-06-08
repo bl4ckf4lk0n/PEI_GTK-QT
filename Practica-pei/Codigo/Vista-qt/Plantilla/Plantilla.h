@@ -4,6 +4,7 @@
 #include <iostream>
 #include <QFileDialog>
 #include <QTabWidget>
+#include <QMessageBox>
 #include "ui_Plantilla.h"
 #include "../../Modelo/modelo.h"
 #include "../Formulario_Registro/Formulario_Registro.h"
@@ -49,7 +50,8 @@ private slots:
 
 	/*Permite exportar los registros de una pestaña en formato CSV*/
 	void on_actionExportar_triggered();
-
+	
+ 	void closeEvent(QCloseEvent *event);
 
 private:
  Ui::App_Main ui;

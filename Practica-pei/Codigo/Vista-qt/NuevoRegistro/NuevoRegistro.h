@@ -18,6 +18,8 @@ private slots:
  /*Guarda un nuevo registro en la pestaña correspondiente, añadiendola al vector de personas correspondiente del modelo*/
  void on_Btn_GuardarRegistro_clicked();
 
+ void closeEvent(QCloseEvent *event);
+
 private:
  Ui::Dialog_NuevoRegistro ui;
  QMainWindow* parent;

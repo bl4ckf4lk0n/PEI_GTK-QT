@@ -23,5 +23,24 @@ void NuevoRegistro::on_Btn_GuardarRegistro_clicked()
 
 	model->InsertarPersona(this->pestanya,p);
 
-	this->close();
+	this->hide();
+}
+
+void NuevoRegistro::closeEvent(QCloseEvent *event)
+{
+	QMessageBox confirmacion(this);
+    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+    confirmacion.addButton("No",QMessageBox::NoRole);
+    confirmacion.setIcon(QMessageBox::Question);
+    confirmacion.setText("¿Cerrar la ventana de nuevo registro?");
+    int ret = confirmacion.exec();	
+
+    if(ret == 0)
+    {
+    	event->accept();
+    }
+    else
+    {
+    	event->ignore();
+    }
 }

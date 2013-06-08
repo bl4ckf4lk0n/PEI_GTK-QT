@@ -28,7 +28,15 @@ void Formulario_Busqueda::on_Btn_Buscar_clicked()
 	if(pos != -1)
 	{
 		this->NuevaPestanya("Busqueda "+tab->tabText(this->pestanya),pos,false);
-		this->close();
+		this->hide();
+	}
+	else
+	{
+		QMessageBox alerta(this);
+	    alerta.addButton("Cerrar",QMessageBox::RejectRole);
+	    alerta.setIcon(QMessageBox::Information);
+	    alerta.setText("No se han encontrado coincidencias");
+	    alerta.exec();
 	}
 
 
@@ -43,4 +51,23 @@ void Formulario_Busqueda::NuevaPestanya(QString nomPestanya,int pos,bool nuevo)
     tab->addTab(form,nomPestanya);  
     
     tab->setUpdatesEnabled(true);  
+}
+
+void Formulario_Busqueda::closeEvent(QCloseEvent *event)
+{
+	QMessageBox confirmacion(this);
+    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+    confirmacion.addButton("No",QMessageBox::NoRole);
+    confirmacion.setIcon(QMessageBox::Question);
+    confirmacion.setText("¿Cerrar la ventana de búsqueda?");
+    int ret = confirmacion.exec();	
+
+    if(ret == 0)
+    {
+    	event->accept();
+    }
+    else
+    {
+    	event->ignore();
+    }
 }

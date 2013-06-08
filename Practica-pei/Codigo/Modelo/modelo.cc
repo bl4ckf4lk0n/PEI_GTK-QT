@@ -134,7 +134,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(nom != "")
 	    		{
-	    			if(p.getNombre().find(nom) != string::npos)
+	    			if(p.getNombre().find(nom) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -144,7 +144,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(dir != "")
 	    		{
 
-	    			if(p.getDireccion().find(dir) != string::npos)
+	    			if(p.getDireccion().find(dir) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -153,9 +153,8 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(codpostal != "")
 	    		{
-	    			if(p.getCodPostal().find(codpostal) != string::npos)
+	    			if(p.getCodPostal().find(codpostal) == string::npos)
 	    			{
-	    				cout<<p.getCodPostal()<<endl;
 	    				insertar = false;
 	    				continue;
 	    			}
@@ -164,7 +163,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(tel != "")
 	    		{
 
-	    			if(p.getTelefono().find(tel) != string::npos)
+	    			if(p.getTelefono().find(tel) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -174,7 +173,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(pob != "")
 	    		{
 
-	    			if(p.getPoblacion().find(pob) != string::npos)
+	    			if(p.getPoblacion().find(pob) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -183,7 +182,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(email != "")
 	    		{
-	    			if(p.getEmail().find(email) != string::npos)
+	    			if(p.getEmail().find(email) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;

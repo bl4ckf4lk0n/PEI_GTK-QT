@@ -10,6 +10,7 @@ Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo
 	this->index = 0;
 	val_SB_Adelante_Anterior = 1;
 	val_SB_Atras_Anterior = 0;
+	cambiado = false;
 	if(!nuevo)
 	{
 			this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
@@ -38,6 +39,12 @@ Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo
 		ui.SB_Atras->setValue(0);
 	}
 
+	QObject::connect(ui.LE_CodPostal, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
+	QObject::connect(ui.LE_Nombre, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
+	QObject::connect(ui.LE_Direccion, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
+	QObject::connect(ui.LE_Poblacion, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
+	QObject::connect(ui.LE_Telefono, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
+	QObject::connect(ui.LE_Email, SIGNAL(textChanged(QString)), SLOT(textoCambiado()));
 
 }
 
@@ -69,40 +76,90 @@ void Formulario_Registro::MostrarPersona(persona p)
 
 void Formulario_Registro::on_Btn_Adelante_clicked()
 {
-	int incremento = ui.SB_Adelante->value();
-	if(this->index+incremento < this->model->getNumPersonas(this->parent->currentIndex()))
+	bool avanzar = true;
+	if(cambiado)
 	{
-		this->index+=incremento;
-		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+		QMessageBox confirmacion(this);
+	    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+	    confirmacion.addButton("No",QMessageBox::NoRole);
+	    confirmacion.setIcon(QMessageBox::Question);
+	    confirmacion.setText("Los cambios no se guardarán hasta que pulse el botón Modificar Registro.\n¿Desea continuar?");
+	    int ret = confirmacion.exec();		
 
-		if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
+	    if(ret != 0)
+	    {
+	    	avanzar = false;
+	    }
+
+	}
+
+	if(avanzar)
+	{
+		int incremento = ui.SB_Adelante->value();
+		if(this->index+incremento < this->model->getNumPersonas(this->parent->currentIndex()))
 		{
-			//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
-			ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
-		}
+			this->index+=incremento;
+			this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 
+			if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
+			{
+				//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
+				ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
+			}
+
+		}
+		cambiado = false;
 	}
 }
 
 void Formulario_Registro::on_Btn_Atras_clicked()
 {
-	int decremento = ui.SB_Atras->value();
-	if(this->index-decremento >= 0)
+	bool retroceder = true;
+	if(cambiado)
 	{
-		this->index-=decremento;
-		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+		QMessageBox confirmacion(this);
+	    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+	    confirmacion.addButton("No",QMessageBox::NoRole);
+	    confirmacion.setIcon(QMessageBox::Question);
+	    confirmacion.setText("Los cambios no se guardarán hasta que pulse el botón Modificar Registro.\n¿Desea continuar?");
+	    int ret = confirmacion.exec();		
 
-
-		if(this->index-ui.SB_Atras->value() < 0)
-		{
-			ui.SB_Atras->setValue(this->index);
-		}
+	    if(ret != 0)
+	    {
+	    	retroceder = false;
+	    }
 
 	}
+
+	if(retroceder)
+	{
+		int decremento = ui.SB_Atras->value();
+		if(this->index-decremento >= 0)
+		{
+			this->index-=decremento;
+			this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+
+
+			if(this->index-ui.SB_Atras->value() < 0)
+			{
+				ui.SB_Atras->setValue(this->index);
+			}
+
+		}
+		cambiado = false;
+	}
+
 }
 
 void Formulario_Registro::on_Btn_ModRegistro_clicked()
 {
+
+	QMessageBox informacion(this);
+    informacion.addButton("Cerrar",QMessageBox::RejectRole);
+    informacion.setIcon(QMessageBox::Information);
+    informacion.setText("Registro modificado");
+    informacion.exec();
+
 	persona* p = this->model->ObtenerReferenciaPersona(this->parent->currentIndex(),this->index);
 	
 	p->setNombre(ui.LE_Nombre->text().toStdString());
@@ -111,39 +168,49 @@ void Formulario_Registro::on_Btn_ModRegistro_clicked()
 	p->setCodPostal(ui.LE_CodPostal->text().toStdString());
 	p->setTelefono(ui.LE_Telefono->text().toStdString());
 	p->setEmail(ui.LE_Email->text().toStdString());
+	cambiado = false;
 }
 
 void Formulario_Registro::on_Btn_BorrarRegistro_clicked()
 {
-	this->model->BorrarPersona(this->parent->currentIndex(),this->index);
-	if(this->model->getNumPersonas(this->parent->currentIndex()) > 0)
-	{
-		if(this->model->getNumPersonas(this->parent->currentIndex()) <= this->index)
+	QMessageBox confirmacion(this);
+    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+    confirmacion.addButton("No",QMessageBox::NoRole);
+    confirmacion.setIcon(QMessageBox::Question);
+    confirmacion.setText("¿Borrar el registro?");
+    int ret = confirmacion.exec();
+
+    if(ret == 0)
+    {
+		this->model->BorrarPersona(this->parent->currentIndex(),this->index);
+		if(this->model->getNumPersonas(this->parent->currentIndex()) > 0)
 		{
-			this->index--;
-		}		
-		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+			if(this->model->getNumPersonas(this->parent->currentIndex()) <= this->index)
+			{
+				this->index--;
+			}		
+			this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 
 
-		if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
-		{
-			//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
-			ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
+			if(this->index+ui.SB_Adelante->value() >= this->model->getNumPersonas(this->parent->currentIndex()))
+			{
+				//cout<<this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1<<endl;
+				ui.SB_Adelante->setValue(this->model->getNumPersonas(this->parent->currentIndex()) - this->index - 1);
+			}
+
+			if(this->index-ui.SB_Atras->value()<0)
+			{
+				ui.SB_Atras->setValue(this->index);
+			}
+
 		}
-
-		if(this->index-ui.SB_Atras->value()<0)
+		else
 		{
-			ui.SB_Atras->setValue(this->index);
-		}
-
-	}
-	else
-	{
-		persona p;
-	 	this->model->InsertarPersona(this->parent->currentIndex(),p);
-		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
-	}
-
+			persona p;
+		 	this->model->InsertarPersona(this->parent->currentIndex(),p);
+			this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
+		}    	
+    }
 
 }
 
@@ -171,4 +238,9 @@ void Formulario_Registro::on_SB_Atras_valueChanged(int val)
 	{
 		ui.SB_Atras->setValue(this->val_SB_Atras_Anterior);
 	}
+}
+
+void Formulario_Registro::textoCambiado()
+{
+	this->cambiado = true;
 }
