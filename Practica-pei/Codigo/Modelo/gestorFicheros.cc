@@ -143,7 +143,7 @@ void gestorFicheros::escribirVectorPersonas(int indiceFichero, vector<persona> n
 	salida.open(files.at(indiceFichero).c_str());
 
 	if(salida.is_open()){
-		for(int i = 0; i < nuevasPersonas.size(); i++){
+		for(unsigned int i = 0; i < nuevasPersonas.size(); i++){
 			escribirPersona(salida, nuevasPersonas.at(i));
 		}
 
@@ -185,13 +185,14 @@ void gestorFicheros::modificarFichero(string file,int pos)
 
 int gestorFicheros::obtenerPosicion(string file)
 {
-	for(int i = 0; i<files.size(); i++ )
+	for(unsigned int i = 0; i<files.size(); i++ )
 	{
 		if(files[i] == file)
 		{
 			return i;
 		}
 	}
+	return -1;
 }
 
 void gestorFicheros::exportarCSV(string file,vector<persona> nuevasPersonas)
@@ -202,7 +203,7 @@ void gestorFicheros::exportarCSV(string file,vector<persona> nuevasPersonas)
 	if(salida.is_open()){
 		salida<<"NOMBRE,DIRECCION,POBLACION,CPOSTAL,TELEFONO,EMAIL"<<endl;
 
-		for(int i = 0; i < nuevasPersonas.size(); i++){
+		for(unsigned int i = 0; i < nuevasPersonas.size(); i++){
 
 			salida	<<"\"" <<nuevasPersonas[i].getNombre()<<"\""
 					<<",\""<<nuevasPersonas[i].getDireccion()<<"\""
