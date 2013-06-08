@@ -46,18 +46,21 @@ void modelo::GuardarComo(string fich, int pos)
 		this->listaRutas[pos] = fich;
 		fichero.removeFile(f);
 	}catch(fileException& e){
-		cerr<<e.what()<<endl;
+		/*cerr<<e.what()<<endl;
 		cerr<<"0"<<endl;
 		if(listaRutas[pos] == "")
 		{
-			fichero.add(fich);
+			pos = fichero.add(fich);
 		}
 		fichero.modificarFichero(fich,pos);
 		cerr<<"1"<<endl;
 		fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
 		cerr<<"2"<<endl;
 		this->listaRutas[pos] = fich;
-		cerr<<"Se ha modificado el fichero que ya existia"<<endl;
+		cerr<<"Se ha modificado el fichero que ya existia"<<endl;*/
+		fichero.modificarFichero(fich,pos);
+		fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
+		this->listaRutas[pos] = fich;
 	}
 }
 
@@ -66,6 +69,9 @@ int modelo::NuevoArchivo()
 	std::vector<persona> nuevaLista;
 	listaPersonas.push_back(nuevaLista);
 	listaRutas.push_back("");
+	fichero.anyadirAvector("");
+
+	return listaPersonas.size() - 1;
 }
 
 /*
@@ -369,12 +375,12 @@ void modelo::LeerFichero(string file)
 
 void modelo::EliminarFichero(int pos)
 {
-	if(listaRutas[pos] != "")
+	/*if(listaRutas[pos] != "")
 	{
 		int ruta = fichero.obtenerPosicion(listaRutas[pos]);
 		fichero.removeFile(ruta);		
-	}
-
+	}*/
+	fichero.removeFile(pos);
 	listaPersonas.erase(listaPersonas.begin()+pos);
 	listaRutas.erase(listaRutas.begin()+pos);
 }

@@ -33,7 +33,7 @@ public:
 
 	void escribirVectorPersonas(int indiceFichero, vector<persona> nuevasPersonas);
 	void anyadirPersona(int indiceFichero, persona nuevaPersona);
-
+	int anyadirAvector(string file);
 	/* data */
 };
 #endif

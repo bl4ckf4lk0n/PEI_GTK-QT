@@ -18,6 +18,12 @@ int gestorFicheros::add(string file) {
 	return -1;
 }
 
+int gestorFicheros::anyadirAvector(string file)
+{
+	files.push_back(file);
+	return files.size() - 1;
+}
+
 int gestorFicheros::newFile(string file){
 	ifstream origen;
 	origen.open(file.c_str());
