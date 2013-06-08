@@ -83,6 +83,7 @@ void FormularioRegistro::on_btn_adelante_clicked(){
 			cerr<<"Error en el valor"<<endl;
 		}
 		MostrarPersona();
+		ActualizarLabelRegistro();
 	}
 }
 void FormularioRegistro::on_btn_atras_clicked(){
@@ -92,6 +93,9 @@ void FormularioRegistro::on_btn_atras_clicked(){
 		dialogo_confirmacion->hide();
 	}
 	if(continuar == Gtk::RESPONSE_OK){
+		
+
+
 		Gtk::SpinButton* sp_atras;
 		builder->get_widget("sp_atras",sp_atras);
 		int valor = sp_atras->get_value();
@@ -102,8 +106,21 @@ void FormularioRegistro::on_btn_atras_clicked(){
 			cerr<<"Error en el valor"<<endl;
 		}
 		MostrarPersona();
+
+		ActualizarLabelRegistro();
+
 	}
 }
+void FormularioRegistro::ActualizarLabelRegistro(){
+	Gtk::Label* nombreRegistro = 0;
+	builder->get_widget("lb_numRegistro", nombreRegistro);
+	string nombre = nombreRegistro->get_text();
+	vector<string> aux;
+	boost::algorithm::split(aux,nombre,boost::is_any_of(" "));
+	nombre = aux[0] + " " + boost::lexical_cast<string,int>(index);
+	nombreRegistro->set_text(nombre);
+}
+
 
 void FormularioRegistro::on_btn_ModRegistro_clicked(){
 	persona* p = this->mod->ObtenerReferenciaPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),this->index);	

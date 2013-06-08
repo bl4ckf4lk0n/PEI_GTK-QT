@@ -3,6 +3,7 @@
 
 #include <gtkmm.h>
 #include <iostream>
+#include <boost/algorithm/string.hpp>
 #include "../Modelo/modelo.h"
 
 using namespace std;
@@ -26,6 +27,7 @@ protected:
   void on_btn_BorrarRegistro_clicked();
   void on_tb_changed();
 
+  void ActualizarLabelRegistro();
 	void MostrarPersona(persona p);
   	Glib::RefPtr<Gtk::Builder> builder;
  private:
