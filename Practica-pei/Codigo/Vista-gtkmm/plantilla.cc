@@ -39,6 +39,8 @@ Plantilla::Plantilla(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& 
 	dialogo->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	dialogo->add_button("Seleccionar", Gtk::RESPONSE_OK);
 
+	builder->get_widget("dialogo_busqueda", dialogo_busqueda);
+
 	abrir();
 	/*if(pPestanas->get_n_pages() == 0){
 		menu_hijos[0]->set_sensitive(false);
@@ -184,8 +186,10 @@ void Plantilla::buscar(){
 				int buscar = mod.Buscar(pPestanas->get_current_page(),dialog->getExacta(), dialog->getAnd(), dialog->getNombre(),dialog->getDireccion(),dialog->getCodigoPostal(),dialog->getTelefono(), dialog->getPoblacion(),dialog->getCorreo());
 				if(buscar > 0)
 					addTab("Resultados de búsqueda");
-				else
-					cout<<"Error en la búsqueda"<<endl;
+				else{
+					dialogo_busqueda->run();
+					dialogo_busqueda->hide();
+				}
 			}else{
 				continuar = dialogo_confirmacion->run();
 				dialogo_confirmacion->hide();

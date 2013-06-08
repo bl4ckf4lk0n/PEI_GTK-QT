@@ -37,6 +37,7 @@ protected:
   Gtk::FileChooserDialog* dialogo;
   Gtk::Dialog* dialogo_acercaDe;
   Gtk::Dialog* dialogo_confirmacion;
+  Gtk::MessageDialog* dialogo_busqueda;
 };
 
 #endif //GTKMM_PLANTILLA_H
