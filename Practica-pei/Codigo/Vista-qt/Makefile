@@ -98,7 +98,7 @@ DIST          = /usr/share/qt4/mkspecs/common/unix.conf \
 		Vista-qt.pro
 QMAKE_TARGET  = Vista-qt
 DESTDIR       = 
-TARGET        = Vista-qt
+TARGET        = mainQT
 
 first: all
 ####### Implicit rules

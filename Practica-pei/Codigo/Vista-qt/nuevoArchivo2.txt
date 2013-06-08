@@ -1,7 +1,0 @@
-
-NOMBRE sgcdc
-DIRECCION sdgsd
-POBLACION gsdgs
-CPOSTAL gsdgsdg
-TELEFONO gsd
-EMAIL dgsd
