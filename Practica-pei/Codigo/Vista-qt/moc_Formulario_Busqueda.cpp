@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Formulario_Busqueda.h'
 **
-** Created: Thu Jun 6 11:25:43 2013
+** Created: Sat Jun 8 14:43:03 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Formulario_Busqueda[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,14 @@ static const uint qt_meta_data_Formulario_Busqueda[] = {
 
  // slots: signature, parameters, type, tag, flags
       21,   20,   20,   20, 0x08,
+      51,   45,   20,   20, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_Formulario_Busqueda[] = {
     "Formulario_Busqueda\0\0on_Btn_Buscar_clicked()\0"
+    "event\0closeEvent(QCloseEvent*)\0"
 };
 
 void Formulario_Busqueda::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -47,10 +49,10 @@ void Formulario_Busqueda::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         Formulario_Busqueda *_t = static_cast<Formulario_Busqueda *>(_o);
         switch (_id) {
         case 0: _t->on_Btn_Buscar_clicked(); break;
+        case 1: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData Formulario_Busqueda::staticMetaObjectExtraData = {
@@ -85,9 +87,9 @@ int Formulario_Busqueda::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }

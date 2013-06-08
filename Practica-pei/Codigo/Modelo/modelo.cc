@@ -76,7 +76,6 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	std::vector<persona> resultados;
 
 	bool insertar = true;
-	boost::regex regEx;
 	for (persona p : this->listaPersonas[pos] )
 	{
 		insertar = true;
@@ -150,9 +149,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(nom != "")
 	    		{
-
-					regEx = nom;
-	    			if(!boost::regex_search(p.getNombre(),regEx))
+	    			if(p.getNombre().find(nom) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -162,8 +159,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(dir != "")
 	    		{
 
-					regEx = dir;
-	    			if(!boost::regex_search(p.getDireccion(),regEx))
+	    			if(p.getDireccion().find(dir) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -172,9 +168,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(codpostal != "")
 	    		{
-
-					regEx = codpostal;
-	    			if(!boost::regex_search(p.getCodPostal(),regEx))
+	    			if(p.getCodPostal().find(codpostal) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -184,8 +178,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(tel != "")
 	    		{
 
-					regEx = tel;
-	    			if(!boost::regex_search(p.getTelefono(),regEx))
+	    			if(p.getTelefono().find(tel) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -195,8 +188,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    		if(pob != "")
 	    		{
 
-					regEx = pob;
-	    			if(!boost::regex_search(p.getPoblacion(),regEx))
+	    			if(p.getPoblacion().find(pob) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -205,9 +197,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(email != "")
 	    		{
-
-					regEx = email;
-	    			if(!boost::regex_search(p.getEmail(),regEx))
+	    			if(p.getEmail().find(email) == string::npos)
 	    			{
 	    				insertar = false;
 	    				continue;
@@ -283,8 +273,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 	    	{
 				if(nom != "")
 	    		{
-					regEx = nom;
-	    			if(boost::regex_search(p.getNombre(),regEx))
+	    			if(p.getNombre().find(nom) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -293,8 +282,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(dir != "")
 	    		{
-					regEx = dir;
-	    			if(boost::regex_search(p.getDireccion(),regEx))
+	    			if(p.getDireccion().find(dir) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -303,8 +291,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(codpostal != "")
 	    		{
-					regEx = codpostal;
-	    			if(boost::regex_search(p.getCodPostal(),regEx))
+	    			if(p.getCodPostal().find(codpostal) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -313,8 +300,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(tel != "")
 	    		{
-					regEx = tel;
-	    			if(boost::regex_search(p.getTelefono(),regEx))
+	    			if(p.getTelefono().find(tel) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -323,8 +309,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(pob != "")
 	    		{
-					regEx = pob;
-	    			if(boost::regex_search(p.getPoblacion(),regEx))
+	    			if(p.getPoblacion().find(pob) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -333,8 +318,7 @@ int modelo::Buscar(int pos,bool exacta, bool And, string nom,string dir,string c
 
 	    		if(email != "")
 	    		{
-					regEx = email;
-	    			if(boost::regex_search(p.getEmail(),regEx))
+	    			if(p.getEmail().find(email) != string::npos)
 	    			{
 	    				resultados.push_back(p);
 	    				continue;
@@ -371,7 +355,15 @@ void modelo::InsertarPersona(int pos,persona p)
 void modelo::LeerFichero(string file)
 {
 	int pos = this->fichero.add(file);
-	this->listaPersonas.push_back(fichero.getPersonas(pos));
+	try
+	{
+		this->listaPersonas.push_back(fichero.getPersonas(pos));
+	}
+	catch(fileException fexc)
+	{
+		throw fexc;
+	}
+	
 	this->listaRutas.push_back(file);
 }
 

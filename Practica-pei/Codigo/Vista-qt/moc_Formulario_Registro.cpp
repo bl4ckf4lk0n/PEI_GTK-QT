@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'Formulario_Registro.h'
 **
-** Created: Thu Jun 6 11:25:45 2013
+** Created: Sat Jun 8 14:20:11 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_Formulario_Registro[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       6,   14, // methods
+       7,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -37,6 +37,7 @@ static const uint qt_meta_data_Formulario_Registro[] = {
       99,   20,   20,   20, 0x08,
      135,  131,   20,   20, 0x08,
      168,  131,   20,   20, 0x08,
+     198,   20,   20,   20, 0x08,
 
        0        // eod
 };
@@ -48,6 +49,7 @@ static const char qt_meta_stringdata_Formulario_Registro[] = {
     "on_Btn_BorrarRegistro_clicked()\0val\0"
     "on_SB_Adelante_valueChanged(int)\0"
     "on_SB_Atras_valueChanged(int)\0"
+    "textoCambiado()\0"
 };
 
 void Formulario_Registro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -62,6 +64,7 @@ void Formulario_Registro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, 
         case 3: _t->on_Btn_BorrarRegistro_clicked(); break;
         case 4: _t->on_SB_Adelante_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: _t->on_SB_Atras_valueChanged((*reinterpret_cast< int(*)>(_a[1]))); break;
+        case 6: _t->textoCambiado(); break;
         default: ;
         }
     }
@@ -99,9 +102,9 @@ int Formulario_Registro::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 6)
+        if (_id < 7)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 6;
+        _id -= 7;
     }
     return _id;
 }

@@ -38,8 +38,19 @@ void Plantilla::on_actionAbrir_triggered()
 
 void Plantilla::on_tabWidget_tabCloseRequested(int index)
 {
-    model.EliminarFichero(index);
-    ui.tabWidget->removeTab(index);
+    QMessageBox confirmacion(this);
+    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+    confirmacion.addButton("No",QMessageBox::NoRole);
+    confirmacion.setIcon(QMessageBox::Question);
+    confirmacion.setText("¿Seguro que quieres cerrar la pestaña?");
+    int ret = confirmacion.exec();
+
+    if(ret == 0)
+    {
+        model.EliminarFichero(index);
+        ui.tabWidget->removeTab(index);
+    }
+
 }
 
 QString Plantilla::AbrirArchivo()
@@ -52,7 +63,20 @@ QString Plantilla::AbrirArchivo()
 
     if( !filename.isNull() )
     {
-      model.LeerFichero(filename.toStdString());
+      try
+      {
+            model.LeerFichero(filename.toStdString());
+      }
+      catch(fileException fexc)
+      {
+            QMessageBox mensajeError(this);
+            mensajeError.addButton("Cerrar",QMessageBox::RejectRole);
+            mensajeError.setIcon(QMessageBox::Warning);
+            mensajeError.setText("El archivo seleccionado está mal formado");
+            mensajeError.exec();
+            return "";
+      }
+      
       return filename;
     }
     else
@@ -165,5 +189,24 @@ void Plantilla::on_actionExportar_triggered()
         {
           model.ExportarCSV(filename.toStdString(),this->ui.tabWidget->currentIndex());
         }        
+    }
+}
+
+void Plantilla::closeEvent(QCloseEvent *event)
+{
+    QMessageBox confirmacion(this);
+    confirmacion.addButton("Sí",QMessageBox::ApplyRole);
+    confirmacion.addButton("No",QMessageBox::NoRole);
+    confirmacion.setIcon(QMessageBox::Question);
+    confirmacion.setText("¿Desea cerrar el programa?");
+    int ret = confirmacion.exec();  
+
+    if(ret == 0)
+    {
+        event->accept();
+    }
+    else
+    {
+        event->ignore();
     }
 }

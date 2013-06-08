@@ -2,6 +2,7 @@
 #define BUSQUEDA_SRC_H
 
 #include <QMainWindow>
+#include <QMessageBox>
 #include "ui_Formulario_Busqueda.h"
 #include "../../Modelo/modelo.h"
 #include "../../Modelo/persona.h"
@@ -19,6 +20,7 @@ public:
 private slots:
  /*Realiza una llamada al metodo de buscar del modelo pasandoles todos los datos para la búsqueda*/
  void on_Btn_Buscar_clicked();
+ void closeEvent(QCloseEvent *event);
 
 private:
  Ui::Dialog_Busqueda ui;

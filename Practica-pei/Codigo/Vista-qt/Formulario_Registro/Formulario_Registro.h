@@ -2,6 +2,7 @@
 #define FORMREG_H
 
 #include <boost/lexical_cast.hpp>
+#include <QMessageBox>
 #include "ui_FormularioRegistro.h"
 #include "../../Modelo/modelo.h"
 #include "../../Modelo/persona.h"
@@ -36,6 +37,8 @@ private slots:
 	/*Comprueba si el valor del SpinBox de retroceso no se sale del rango*/
 	void on_SB_Atras_valueChanged(int val);
 
+	void textoCambiado();
+
 private:
  Ui::Form_registro ui;
  QTabWidget* parent;
@@ -43,6 +46,7 @@ private:
  int index;
  int val_SB_Adelante_Anterior;
  int val_SB_Atras_Anterior;
+ bool cambiado;
 };
 
 #endif

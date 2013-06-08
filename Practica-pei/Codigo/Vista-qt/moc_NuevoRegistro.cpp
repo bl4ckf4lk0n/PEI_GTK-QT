@@ -1,7 +1,7 @@
 /****************************************************************************
 ** Meta object code from reading C++ file 'NuevoRegistro.h'
 **
-** Created: Thu Jun 6 11:25:48 2013
+** Created: Sat Jun 8 14:59:23 2013
 **      by: The Qt Meta Object Compiler version 63 (Qt 4.8.4)
 **
 ** WARNING! All changes made in this file will be lost!
@@ -23,7 +23,7 @@ static const uint qt_meta_data_NuevoRegistro[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       1,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -32,12 +32,14 @@ static const uint qt_meta_data_NuevoRegistro[] = {
 
  // slots: signature, parameters, type, tag, flags
       15,   14,   14,   14, 0x08,
+      54,   48,   14,   14, 0x08,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_NuevoRegistro[] = {
     "NuevoRegistro\0\0on_Btn_GuardarRegistro_clicked()\0"
+    "event\0closeEvent(QCloseEvent*)\0"
 };
 
 void NuevoRegistro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -47,10 +49,10 @@ void NuevoRegistro::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _i
         NuevoRegistro *_t = static_cast<NuevoRegistro *>(_o);
         switch (_id) {
         case 0: _t->on_Btn_GuardarRegistro_clicked(); break;
+        case 1: _t->closeEvent((*reinterpret_cast< QCloseEvent*(*)>(_a[1]))); break;
         default: ;
         }
     }
-    Q_UNUSED(_a);
 }
 
 const QMetaObjectExtraData NuevoRegistro::staticMetaObjectExtraData = {
@@ -85,9 +87,9 @@ int NuevoRegistro::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 1)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 1;
+        _id -= 2;
     }
     return _id;
 }
