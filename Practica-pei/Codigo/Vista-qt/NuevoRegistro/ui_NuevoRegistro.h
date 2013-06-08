@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'NuevoRegistro.ui'
 **
-** Created: Fri Apr 26 18:44:22 2013
+** Created: Sat Jun 8 20:00:55 2013
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -130,7 +130,7 @@ public:
 
     void retranslateUi(QDialog *Dialog_NuevoRegistro)
     {
-        Dialog_NuevoRegistro->setWindowTitle(QApplication::translate("Dialog_NuevoRegistro", "Dialog", 0, QApplication::UnicodeUTF8));
+        Dialog_NuevoRegistro->setWindowTitle(QApplication::translate("Dialog_NuevoRegistro", "Nuevo registro", 0, QApplication::UnicodeUTF8));
         GB_NuevoRegistro->setTitle(QApplication::translate("Dialog_NuevoRegistro", "Nuevo registro", 0, QApplication::UnicodeUTF8));
         label_6->setText(QApplication::translate("Dialog_NuevoRegistro", "Correo electr\303\263nico", 0, QApplication::UnicodeUTF8));
         label->setText(QApplication::translate("Dialog_NuevoRegistro", "Nombre", 0, QApplication::UnicodeUTF8));

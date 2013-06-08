@@ -34,7 +34,7 @@ void on_actionAcerca_triggered();
 void on_actionExportar_triggered();
 
 /*Slot que recoge el evento de cerrado de la ventana principal. Confirma el cerradod del programa
-  Parámetros: QCloseEvent *event->puntero al evento generado.
+  Parámetros: QCloseEvent *event->puntero al evento generado.git 
 */
 void closeEvent(QCloseEvent *event);
 

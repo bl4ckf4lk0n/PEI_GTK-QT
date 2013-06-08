@@ -6,48 +6,89 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>693</width>
+    <height>388</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Acerca de</string>
   </property>
-  <widget class="QWidget" name="">
+  <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
      <x>7</x>
      <y>10</y>
-     <width>381</width>
-     <height>281</height>
+     <width>678</width>
+     <height>370</height>
     </rect>
    </property>
    <layout class="QGridLayout" name="gridLayout">
     <item row="0" column="0">
      <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+        <underline>false</underline>
+        <strikeout>false</strikeout>
+        <kerning>true</kerning>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="text">
-       <string>Autores</string>
+       <string>Autores
+</string>
       </property>
      </widget>
     </item>
     <item row="1" column="0">
      <widget class="QLabel" name="LB_Autores">
       <property name="text">
-       <string>TextLabel</string>
+       <string>Víctor Guzmán Pedrajas.
+Adrián Escolano Díaz.
+</string>
       </property>
      </widget>
     </item>
     <item row="2" column="0">
      <widget class="QLabel" name="label_2">
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <italic>true</italic>
+        <bold>true</bold>
+       </font>
+      </property>
       <property name="text">
-       <string>Mejoras</string>
+       <string>Mejoras
+</string>
       </property>
      </widget>
     </item>
     <item row="3" column="0">
      <widget class="QLabel" name="LB_Mejoras">
       <property name="text">
-       <string>TextLabel</string>
+       <string>-Opción de Guardar Como...
+
+-Busqueda exacta o por subcadenas.
+
+-Valores de búsqueda conectados por Y o por O.
+
+-Trabajar con varios ficheros a través de pestañas.
+
+-Exportar a formato CVS.
+
+-Opción de crear un nuevo fichero.
+
+-Comprobar malformación de un fichero.
+
+-Movimiento de N en N entre registros.
+
+-Confirmaciones al usuario de actividades 'peligrosas'.
+</string>
       </property>
      </widget>
     </item>
