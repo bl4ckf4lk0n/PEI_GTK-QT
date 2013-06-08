@@ -13,10 +13,9 @@ Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo
 	if(!nuevo)
 	{
 			this->MostrarPersona(this->model->MostrarPersona(m->getNumFicheros()-1,0));
-
 			ui.SB_Adelante->setMaximum(100);
 			ui.SB_Adelante->setMinimum(0);
-			ui.SB_Adelante->setValue(1);
+			ui.SB_Adelante->setValue(0);
 
 			ui.SB_Atras->setMaximum(100);
 			ui.SB_Atras->setMinimum(0);
@@ -29,6 +28,14 @@ Formulario_Registro::Formulario_Registro(QTabWidget *parent,modelo* m,bool nuevo
 	 	ui.GB_Registro->setTitle(aux);
 	 	persona p;
 	 	this->model->InsertarPersona(this->model->getNumFicheros()-1,p);
+
+ 		ui.SB_Adelante->setMaximum(100);
+		ui.SB_Adelante->setMinimum(0);
+		ui.SB_Adelante->setValue(0);
+
+		ui.SB_Atras->setMaximum(100);
+		ui.SB_Atras->setMinimum(0);
+		ui.SB_Atras->setValue(0);
 	}
 
 
@@ -132,7 +139,9 @@ void Formulario_Registro::on_Btn_BorrarRegistro_clicked()
 	}
 	else
 	{
-		this->close();
+		persona p;
+	 	this->model->InsertarPersona(this->parent->currentIndex(),p);
+		this->MostrarPersona(this->model->MostrarPersona(this->parent->currentIndex(),this->index));
 	}
 
 
