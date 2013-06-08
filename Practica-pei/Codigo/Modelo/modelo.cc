@@ -48,6 +48,10 @@ void modelo::GuardarComo(string fich, int pos)
 	}catch(fileException& e){
 		cerr<<e.what()<<endl;
 		cerr<<"0"<<endl;
+		if(listaRutas[pos] == "")
+		{
+			fichero.add(fich);
+		}
 		fichero.modificarFichero(fich,pos);
 		cerr<<"1"<<endl;
 		fichero.escribirVectorPersonas(pos,this->listaPersonas[pos]);
