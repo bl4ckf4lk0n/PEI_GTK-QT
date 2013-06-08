@@ -1,0 +1,115 @@
+El código en esta vista esta dividido por ventanas y funcionalidades del programa. Cada carpeta corresponde a una funcionalidad o widget/ventana de la vista QT.
+
+----------PLANTILLA----------
+
+/*Slot que permite abrir un nuevo archivo*/
+void on_actionAbrir_triggered();
+
+/*Slot que nos permite crear un nuevo registro en la pestaña seleccionada actualmente.
+  Si no hay pestañas seleccionadas no hace nada.*/
+void on_actionNuevo_registro_triggered();
+
+/*Slot que nos permite guardar los cambios realizados en los registros de una pestaña.
+  Si el archivo no se ha guardado anteriormente en el disco realiza la misma función que GuardarComo...*/
+void on_actionGuardar_triggered();
+
+/*Slot que nos permite guardar en disco los cambios realizados sobre los registros de una pestaña*/
+void on_actionGuardar_como_triggered();
+
+/*Cierra una pestaña del widget de pestañas, eliminando tambien el vector de personas correspondiente en el modelo
+  Parámetros: -int index->indica la posición de la pestaña a cerrar
+*/
+void on_tabWidget_tabCloseRequested(int index);
+
+/*Crea una nueva pestaña con un registro vacio, de manera que podamos crear de cero un nuevo archivo*/
+void on_actionNuevo_archivo_triggered();
+
+/*Abre el dialogo de búsqueda para la pestaña actual*/
+void on_actionBuscar_triggered();
+
+/*Abre el dialogo de Acerca de*/
+void on_actionAcerca_triggered();
+
+/*Permite exportar los registros de una pestaña en formato CSV*/
+void on_actionExportar_triggered();
+
+/*Slot que recoge el evento de cerrado de la ventana principal. Confirma el cerradod del programa
+  Parámetros: QCloseEvent *event->puntero al evento generado.
+*/
+void closeEvent(QCloseEvent *event);
+
+/*Muestra un selector de archivos con el que abrir un archivo y mostrar los datos
+   en el programa.*/
+QString AbrirArchivo();
+
+/*Añade una nueva pestaña al widget QTabWidget y crea un nuevo widget Formulario_Registro que es
+  añadido a la pestaña
+  Parámetros: -QString nomPestanya->Nombre asociado a la pestaña a crear
+  			  -int pos->Posición del vector de ficheros asociado a la pestaña
+  			  -bool nuevo->Indica si se trata de un nuevo fichero o si ya existe en el disco.
+*/
+void NuevaPestanya(QString nomPestanya,int pos,bool nuevo);
+
+
+----------NUEVO REGISTRO----------
+
+/*Guarda un nuevo registro en la pestaña correspondiente, añadiendola al vector de personas correspondiente del modelo*/
+void on_Btn_GuardarRegistro_clicked();
+
+/*Slot que recoge el evento de cerrado del dialogo. Confirma el cerrado de este.
+  Parámetros: QCloseEvent *event->puntero al evento generado.
+*/
+void closeEvent(QCloseEvent *event);
+
+
+----------FORMULARIO REGISTRO----------
+
+/*Permite avanzar tantos registros como indica el SpinBox de avance. Si se diera el caso de que
+  avanza mas registros de los habidos, no hace nada*/
+void on_Btn_Adelante_clicked();
+
+/*Permite retroceder tantos registros como indica el SpinBox de retroceso. Si se diera el caso de que
+  retrocede mas registros a partir del primero, no hace nada*/
+void on_Btn_Atras_clicked();
+
+/*Modifica el registro con los datos especificados por el usuario, en el modelo*/
+void on_Btn_ModRegistro_clicked();
+
+/*Elimina un registro tanto de la pestaña correspondiente como del vector correspondiente en el modelo*/
+void on_Btn_BorrarRegistro_clicked();
+
+/*Comprueba si el valor del SpinBox de avance no se sale del rango*/
+  Parámetros: int val->Valor del spinbox.
+void on_SB_Adelante_valueChanged(int val);
+
+/*Comprueba si el valor del SpinBox de retroceso no se sale del rango*/
+  Parámetros: int val->Valor del spinbox.
+void on_SB_Atras_valueChanged(int val);
+
+/*Slot que se activa cada vez que el texto de un registro es modificado.
+  Modifica un flag que indica si se ha modificado el registro, poniendolo a true
+*/
+void textoCambiado();
+
+/*
+	Muestra los datos de la persona que se le pasa por parámetro.
+	Parámetros: persona p->Datos sobre el registro persona que ha de mostrarse en la vista.
+*/
+void MostrarPersona(persona p);
+
+
+----------FORMULARIO BÚSQUEDA----------
+
+/*Realiza una llamada al metodo de buscar del modelo pasandoles todos los datos para la búsqueda*/
+void on_Btn_Buscar_clicked();
+
+/*Slot que recoge el evento de cerrado del dialogo. Confirma el cerrado de este.
+Parámetros: QCloseEvent *event->puntero al evento generado.
+*/
+void closeEvent(QCloseEvent *event);
+
+ /*Abre una nueva pestaña con los resultados de la búsqueda*/
+   Parámetros:-QString nomPestanya->Nombre asociado a la pestaña a crear
+  			  -int pos->Posición del vector de ficheros asociado a la pestaña
+  			  -bool nuevo->Indica si se trata de un nuevo fichero o si ya existe en el disco.
+ void NuevaPestanya(QString nomPestanya,int pos,bool nuevo);
