@@ -163,7 +163,7 @@ void Plantilla::guardarComo(){
 		  	mod.GuardarComo(archivo,pPestanas->get_current_page());
 
 		  	// cambiamos el nombre de la pestaña al nombre del archivo
-  			static_cast<Gtk::Label*>(static_cast<Gtk::Box*>(pPestanas->get_tab_label(*(pPestanas->get_children()[0])))->get_children()[0])->set_text(archivo);
+  			static_cast<Gtk::Label*>(static_cast<Gtk::Box*>(pPestanas->get_tab_label(*(pPestanas->get_children()[pPestanas->get_current_page()])))->get_children()[0])->set_text(archivo);
 		}
 	
 	
