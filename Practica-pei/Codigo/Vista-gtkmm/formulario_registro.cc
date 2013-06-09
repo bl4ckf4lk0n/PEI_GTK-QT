@@ -34,12 +34,17 @@ FormularioRegistro::FormularioRegistro(BaseObjectType* cobject, const Glib::RefP
 	tb_telefono->signal_changed().connect(sigc::mem_fun(this,&FormularioRegistro::on_tb_changed));
 	tb_correo->signal_changed().connect(sigc::mem_fun(this,&FormularioRegistro::on_tb_changed));
 
+	builder->get_widget("sp_adelante",sp_adelante);
+	builder->get_widget("sp_atras",sp_atras);
+
+	sp_adelante->signal_changed().connect(sigc::mem_fun(this,&FormularioRegistro::on_sp_adelante_changed));
+	sp_atras->signal_changed().connect(sigc::mem_fun(this,&FormularioRegistro::on_sp_atras_changed));
+
+
 	Glib::RefPtr<Gtk::Builder> builder_confirmacion = Gtk::Builder::create_from_file("estas_seguro.glade");
 	builder_confirmacion->get_widget("estasSeguro",dialogo_confirmacion);
 	dialogo_confirmacion->add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	dialogo_confirmacion->add_button(Gtk::Stock::OK, Gtk::RESPONSE_OK);
-
-
 }
 
 void FormularioRegistro::MostrarPersonaVacia(){
@@ -73,8 +78,6 @@ void FormularioRegistro::on_btn_adelante_clicked(){
 		dialogo_confirmacion->hide();
 	}
 	if(continuar == Gtk::RESPONSE_OK){
-		Gtk::SpinButton* sp_adelante;
-		builder->get_widget("sp_adelante",sp_adelante);
 		int valor = sp_adelante->get_value();
 
 		if(index + valor < mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page())){
@@ -93,11 +96,6 @@ void FormularioRegistro::on_btn_atras_clicked(){
 		dialogo_confirmacion->hide();
 	}
 	if(continuar == Gtk::RESPONSE_OK){
-		
-
-
-		Gtk::SpinButton* sp_atras;
-		builder->get_widget("sp_atras",sp_atras);
 		int valor = sp_atras->get_value();
 
 		if(index - valor >= 0){
@@ -163,9 +161,26 @@ void FormularioRegistro::MostrarPersona(){
 	}else{
 		MostrarPersonaVacia();
 	}
+	sp_adelante->get_adjustment()->set_upper(mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page())-index-1);
+	sp_atras->get_adjustment()->set_upper(index);
 	modificado = false;
 }
 
 void FormularioRegistro::on_tb_changed(){
 	modificado = true;
+}
+
+void FormularioRegistro::on_sp_adelante_changed(){
+	int valor = sp_adelante->get_value();
+	int valorMaximo = mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page());
+	if(index + valor >= valorMaximo){
+		sp_adelante->set_value(valorMaximo - index-1);
+	}
+}
+
+void FormularioRegistro::on_sp_atras_changed(){
+	int valor = sp_atras->get_value();
+	if( index - valor < 0){
+		sp_atras->set_value(index);
+	}
 }

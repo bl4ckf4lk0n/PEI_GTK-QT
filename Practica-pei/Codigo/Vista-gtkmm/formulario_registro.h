@@ -26,6 +26,8 @@ protected:
 	void on_btn_ModRegistro_clicked();
   void on_btn_BorrarRegistro_clicked();
   void on_tb_changed();
+  void on_sp_adelante_changed();
+  void on_sp_atras_changed();
 
   void ActualizarLabelRegistro();
 	void MostrarPersona(persona p);
@@ -36,6 +38,7 @@ protected:
   Gtk::Dialog* dialogo_confirmacion;
   bool modificado;
   Gtk::Entry *tb_nombre,* tb_dir,* tb_poblacion,* tb_codigopostal,* tb_telefono,* tb_correo;
+  Gtk::SpinButton *sp_adelante, *sp_atras;
 };
 
 #endif //GTKMM_FORM_REGISTRO_H

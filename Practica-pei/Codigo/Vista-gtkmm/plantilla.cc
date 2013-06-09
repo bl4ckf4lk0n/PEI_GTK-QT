@@ -216,6 +216,7 @@ void Plantilla::nuevoRegistro(){
 			result = dialog->run();
 			if(result == Gtk::RESPONSE_OK){
 				mod.InsertarPersona(pPestanas->get_current_page(), dialog->getNuevaPersona());
+				static_cast<FormularioRegistro*>(pPestanas->get_children()[pPestanas->get_current_page()])->MostrarPersona();
 			}else{
 				continuar = dialogo_confirmacion->run();
 				dialogo_confirmacion->hide();
