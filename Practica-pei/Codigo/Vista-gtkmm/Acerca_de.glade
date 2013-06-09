@@ -75,13 +75,18 @@
             <property name="can_focus">False</property>
             <property name="halign">start</property>
             <property name="label" translatable="yes">Las mejoras incluidas son:
-	-	Navegación de N en N
-	-	Gestión de múltiples archivos independientes
+	-	Guardar como...
 	-	Búsqueda exacta y por subcadenas
 	-	Búsqueda con operador "Y" y con operador "O"
-	-	
-	-	
-	-	</property>
+	-	Gestión de múltiples ficheros independientes
+	-	Exportar a CSV
+	-	Nuevo fichero...
+	-	Comprobación de fichero mal formado
+	-	Nuevo fichero...
+	-	Navegación de N en N
+	-	Diálogos de confirmación
+	-	Límites dinámicos en el movimiento entre registros
+	-	Pestañas con botón de cierre en Gtk</property>
             <property name="justify">fill</property>
             <property name="wrap">True</property>
           </object>
