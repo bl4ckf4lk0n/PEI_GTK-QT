@@ -1,0 +1,91 @@
+La versión de Gtkmm utilizada para esta vista es la versión 3.0
+El código de esta vista está organizado alrededor de los ficheros .glade creados para cada widget/ventana importante. Así, todos los widgets con una funcionalidad más elaborada tienen un fichero .cc y un fichero .h asociados, mientras que los widgets que solamente se muestran, únicamente tienen el fichero .glade
+
+---------- PLANTILLA ----------
+
+/* Slot para la señal 'clicked' del botón incluido en cada pestaña. Cierra la pestaña, notificando al modelo que se debe eliminar un fichero. El parámetro 'hijo' es el contenido de la pestaña (de la clase FormularioRegistro) */
+	void on_button_quit_tab(Gtk::Widget* hijo);
+
+/* Slot para la señal 'activated' del item 'Nuevo Archivo' del menú superior. Añade una pestaña con un fichero nuevo. Notifica al modelo que se ha creado un fichero nuevo e inserta una persona vacía */
+	void addTabNuevo();
+
+/* Añade una pestaña. Se encarga de crear la pestaña con botón, asignar el slot al botón, cambiar el nombre de la pestaña según el parámetro 'nombre' y crea el formularioRegistro que se mostrará */
+	void addTab(string nombre);
+
+/* Slot para la señal 'activated' del item 'Salir' del menú superior. Pide confirmación y, si el usuario acepta, cierra la aplicación */
+	void quit();
+
+/* Slot para la señal 'activated' del item 'Abrir' del menú superior. Muestra un diálogo de selección de fichero y, cuando el usuario selecciona un fichero, llama al modelo para leerlo. Si el modelo devuelve una excepción, se captura y se muestra el error, volviendo a la pantalla principal. */
+	void abrir();
+
+/* Slot para la señal 'activated' del item 'Guardar' del menú superior. Si el fichero es nuevo, llama a guardarComo, si no es nuevo, llama al modelo para guardar los cambios. */
+	void guardar();
+
+/* Slot para la señal 'activated' del item 'Guardar como' del menú superior. Muestra un diálogo de selección de fichero y, cuando el usuario selecciona un fichero, llama al modelo para guardar los datos. Después actualiza el nombre de la pestaña al nombre del fichero */
+	void guardarComo();
+
+/* Slot para la señal 'activated' del item 'Buscar' del menú superior. Muestra un formulario de búsqueda, en el que el usuario debe introducir los datos a buscar. Si la búsqueda ha devuelto resultados, añade una nueva pestaña a la vista. Si no ha devuelto, muestra un diálogo indicándolo. */
+	void buscar();
+
+/* Slot para la señal 'activated' del item 'Exportar' del menú superior. Muestra un diálogo de selección de fichero y llama al modelo para exportar los datos */
+	void exportar();
+
+/* Slot para la señal 'activated' del item 'Nuevo Registro' del menú superior. Muestra el formulario de nuevo registro y llama al modelo para añadir el nuevo registro */
+	void nuevoRegistro();
+
+/* Slot para la señal 'activated' del item 'Acerca de' del menú superior. Muestra el diálogo de Acerca de */
+	void acercaDe();
+
+---------- FORMULARIO REGISTRO ----------
+
+
+/* Asigna la referencia al modelo al parámetro '_mod' */
+void setModelo(modelo* _mod);
+
+/* Muestra la persona que corresponda */
+void MostrarPersona();
+
+/* Muestra una persona con todos los campos vacíos */
+void MostrarPersonaVacia();
+
+/* Slot para la señal 'clicked' del botón de avance entre registros. Cambia el índice actual según el valor del spinButton. Si el registro actual ha cambiado y no se han guardado los datos, pide confirmación del usuario. */
+void on_btn_adelante_clicked();
+
+/* Slot para la señal 'clicked' del botón de retroceso entre registros. Cambia el índice actual según el valor del spinButton. Si el registro actual ha cambiado y no se han guardado los datos, pide confirmación del usuario. */
+void on_btn_atras_clicked();
+
+/* Slot para la señal 'clicked' del botón de modificar registro. Guarda los cambios del objeto persona que se está mostrando */
+void on_btn_ModRegistro_clicked();
+
+/* Slot para la señal 'clicked' del botón de borrar registro. Pide confirmación al usuario, si acepta, borra el registro */
+void on_btn_BorrarRegistro_clicked();
+
+/* Slot para la señal 'changed' de los campos de entrada de texto. Marca el registro como modificado */
+void on_tb_changed();
+
+/* Slot para la señal 'changed' del SpinButton. Comprueba que el incremento no salga de los límites */
+void on_sp_adelante_changed();
+
+/* Slot para la señal 'changed' del SpinButton. Comprueba que el incremento no salga de los límites */
+void on_sp_atras_changed();
+
+/* Función auxiliar que cambia el nombre del registro según cuál se está mostrando */
+void ActualizarLabelRegistro();
+
+/* Función que cambia los valores de los campos de texto en el formulario, según los datos de la persona 'p' */
+void MostrarPersona(persona p);
+
+---------- NUEVO REGISTRO ----------
+
+/* Slot para la señal 'clicked' del botón de guardar. Almacena en la variable local 'nuevaPersona' los datos que introduzca el usuario */
+	void FormularioNuevo::on_btn_Guardar()
+
+/* Devuelve la persona almacenada en la función anterior */
+	persona getNuevaPersona()
+
+---------- FORMULARIO BÚSQUEDA ----------
+
+/* Slot para la señal 'clicked' del botón de buscar. Almacena en los campos del formulario los datos introducidos. Lanza una respuesta Gtk::RESPONSE_OK */
+	void on_btn_Buscar_click();
+
+FormularioBusqueda también incluye funciones para obtener los campos del mismo.

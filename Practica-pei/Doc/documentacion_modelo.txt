@@ -1,0 +1,103 @@
+El código del modelo está dividido en tres clases principales y una clase auxiliar para gestionar las excepciones. Las tres clases principales son la clase modelo, que representa el modelo en sí; la clase persona, que representa a cada una de las personas que se almacenarán en el modelo; y la clase gestorFicheros, que gestiona la apertura y escritura de los ficheros físicos, para liberar al modelo de esa responsabilidad. La clase fileException representa las excepciones que pueda encontrar el gestor de ficheros.
+
+---------- MODELO ----------
+
+/*Obtiene el vector de personas especificado por 'pos'*/
+	std::vector<persona> getListaPersonas(int pos);
+
+/*Obtiene el numero de personas del vector correspondiente, especificado por 'pos'*/
+	int getNumPersonas(int pos);
+
+/*Obtiene el numero de ficheros abiertos en la ejecución del programa*/
+	int getNumFicheros();
+
+// Funciones de usuario
+
+/*Realiza una llamada al gestor de ficheros para grabar las modificaciones realizadas en el fichero correspondiente, indicado por 'pos'*/
+	void GuardarEnFichero(int pos);
+
+/*Guarda los datos de una pestaña en un nuevo fichero especificado por el usuario. El nombre del fichero es 'fich', los datos se obtienen de la lista de personas en la posición 'pos'*/
+	void GuardarComo(string fich, int pos);
+
+/*Añade un nuevo vector de personas vacío al modelo y un nuevo fichero sin ruta asignada*/
+	int NuevoArchivo();
+
+/*Realiza un filtrado de registros a partir de los datos especificados por el usuario. Los parámetros son:
+'pos': posición del fichero donde buscar
+'exacta': indicador de si la búsqueda debe ser exacta o por subcadenas
+'And': indicador de si la búsqueda se realizará con el operador and o el operador or
+'nom': dato para buscar en el nombre
+'dir': dato para buscar en la dirección
+'codpostal': dato para buscar en el código postal
+'tel': dato para buscar en el teléfono
+'pob': dato para buscar en la población
+'email': dato para buscar en el email
+*/
+	int Buscar(int pos,bool exacta, bool And, string nom,string dir,string codpostal,string tel, string pob,string email);
+
+/*Borra la persona 'id' del vector de personas en la posición 'pos'*/
+	void BorrarPersona(int pos,int id);
+
+/*Inserta la persona 'p' en el vector de personas en la posición 'pos'*/
+	void InsertarPersona(int pos, persona p);
+
+/*Llama al gestor de ficheros para leer el fichero de nombre 'file'*/
+	void LeerFichero(string file);
+
+/*Elimina el vector de personas en la posición 'pos' de la ejecución del programa*/
+	void EliminarFichero(int pos);
+
+/*Devuelve los datos del registro 'num' en el vector de personas de la posición 'pos' */
+	persona MostrarPersona(int pos,int num);
+
+
+/*Devuelve una referencia al registro 'num' en el vector de personas de la posición 'pos'*/
+	persona* ObtenerReferenciaPersona(int pos,int num);
+
+/*Devuelve la ruta del archivo en la posicion 'pos'*/
+	string ObtenerRuta(int pos);
+
+/*Llama al gestor de ficheros para exportar los datos en la posición 'pos' en un fichero llamado 'fich' */
+	void ExportarCSV(string fich,int pos);
+
+
+---------- PERSONA ----------
+
+Persona puede construirse con el constructor por defecto, que crea una persona vacía (todos sus campos son ""), o con el constructor con parámetros, que asigna sus campos al parámetro correspondiente.
+
+Persona también incluye métodos Get y Set para cada uno de sus campos.
+
+---------- GESTOR_FICHEROS ----------
+
+/* Intenta abrir el fichero 'file' como fichero de entrada. Si lo consigue, lo añade a la lista de ficheros. Si no lo consigue lanza una excepción fileException. Devuelve la posición del fichero en la lista */
+	int add(string file);
+
+/* Crea un fichero nuevo en el disco con nombre 'file'. Si el fichero ya existe lanza una excepción fileException. Si no existe lo crea y devuelve la posición del fichero en la lista */
+	int newFile(string file);
+
+/* Elimina el fichero en la posición 'pos' de la lista de ficheros de la aplicación. No borra el archivo del disco. */
+	void removeFile(int pos);
+
+/* Devuelve la lista de ficheros */
+	vector<string> getFicheros();
+
+/* Modifica la ruta del fichero almacenada en la posición 'pos', asignándole 'fich' */
+	void modificarFichero(string file,int pos);
+
+/* Busca en la lista de ficheros uno que corresponda con 'file', y devuelve su posición */
+	int obtenerPosicion(string file);
+
+/* Escribe en el fichero 'file' los datos contenidos en 'nuevasPersonas' */
+	void exportarCSV(string file,vector<persona> nuevasPersonas;
+
+/* Procesa el fichero en la posición 'indiceFichero' y devuelve las personas incluidas en él  */
+	vector<persona> getPersonas(int indiceFichero);
+
+/* Escribe en el fichero en la posición 'indiceFichero' el listado de personas 'nuevasPersonas' */
+	void escribirVectorPersonas(int indiceFichero, vector<persona> nuevasPersonas);
+
+/* Añade a la lista de ficheros un fichero de nombre 'file', sin tocar el fichero físicamente. Devuelve la posición del fichero en la lista */
+	int anyadirAvector(string file);
+
+/* Escribe la persona 'nuevaPersona' al final del fichero apuntado por el stream 'salida' */
+	void escribirPersona(ofstream & salida, persona nuevaPersona);

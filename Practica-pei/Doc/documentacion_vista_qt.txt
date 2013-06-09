@@ -1,6 +1,7 @@
+La versión de Qt utilizada para esta vista es la versión 4
 El código en esta vista esta dividido por ventanas y funcionalidades del programa. Cada carpeta corresponde a una funcionalidad o widget/ventana de la vista QT.
 
-----------PLANTILLA----------
+---------- PLANTILLA ----------
 
 /*Slot que permite abrir un nuevo archivo*/
 void on_actionAbrir_triggered();
@@ -51,7 +52,7 @@ QString AbrirArchivo();
 void NuevaPestanya(QString nomPestanya,int pos,bool nuevo);
 
 
-----------NUEVO REGISTRO----------
+---------- NUEVO REGISTRO ----------
 
 /*Guarda un nuevo registro en la pestaña correspondiente, añadiendola al vector de personas correspondiente del modelo*/
 void on_Btn_GuardarRegistro_clicked();
@@ -62,7 +63,7 @@ void on_Btn_GuardarRegistro_clicked();
 void closeEvent(QCloseEvent *event);
 
 
-----------FORMULARIO REGISTRO----------
+---------- FORMULARIO REGISTRO ----------
 
 /*Permite avanzar tantos registros como indica el SpinBox de avance. Si se diera el caso de que
   avanza mas registros de los habidos, no hace nada*/
@@ -98,7 +99,7 @@ void textoCambiado();
 void MostrarPersona(persona p);
 
 
-----------FORMULARIO BÚSQUEDA----------
+---------- FORMULARIO BÚSQUEDA ----------
 
 /*Realiza una llamada al metodo de buscar del modelo pasandoles todos los datos para la búsqueda*/
 void on_Btn_Buscar_clicked();
