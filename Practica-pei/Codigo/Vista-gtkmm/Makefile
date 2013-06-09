@@ -1,13 +1,13 @@
 COMP=g++
 OPC=-g -Wall -std=c++0x `pkg-config gtkmm-3.0 --cflags` -lboost_regex
-OPC_MODELO=-g -Wall -std=c++0x
+OPC_MODELO=-Wall -std=c++0x
 LINKS=`pkg-config gtkmm-3.0 --libs`
 OBJ=formulario_registro.o formulario_busqueda.o plantilla.o nuevo.o
 OBJ_MODELO=modelo.o persona.o gestorFicheros.o
 
 .PHONY=clean
 
-all:  main minimain
+all:  main
 objetos: $(OBJ)
 plantilla.o: plantilla.h plantilla.cc
 	$(COMP) $(OPC) plantilla.cc -c
@@ -19,9 +19,6 @@ nuevo.o: nuevo.h nuevo.cc
 	$(COMP) $(OPC) nuevo.cc -c
 main: $(OBJ_MODELO) $(OBJ) main.cc
 	$(COMP) $(OPC) $(OBJ_MODELO) $(OBJ) main.cc $(LINKS) -o mainGTK
-minimain: minimain.cc
-	$(COMP) $(OPC) minimain.cc $(LINKS) -o minimain
-
 modelo.o: ../Modelo/modelo.h ../Modelo/modelo.cc ../Modelo/gestorFicheros.o
 	$(COMP) $(OPC_MODELO) -c  ../Modelo/modelo.cc;
 persona.o: ../Modelo/persona.h ../Modelo/persona.cc
