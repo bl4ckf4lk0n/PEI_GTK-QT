@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'Acerca_de.ui'
 **
-** Created: Sat Jun 8 19:58:50 2013
+** Created: Sun Jun 9 16:09:46 2013
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -36,10 +36,10 @@ public:
     {
         if (Dialog->objectName().isEmpty())
             Dialog->setObjectName(QString::fromUtf8("Dialog"));
-        Dialog->resize(693, 388);
+        Dialog->resize(693, 463);
         layoutWidget = new QWidget(Dialog);
         layoutWidget->setObjectName(QString::fromUtf8("layoutWidget"));
-        layoutWidget->setGeometry(QRect(7, 10, 678, 370));
+        layoutWidget->setGeometry(QRect(7, 10, 678, 445));
         gridLayout = new QGridLayout(layoutWidget);
         gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
         gridLayout->setContentsMargins(0, 0, 0, 0);
@@ -93,24 +93,19 @@ public:
 "", 0, QApplication::UnicodeUTF8));
         label_2->setText(QApplication::translate("Dialog", "Mejoras\n"
 "", 0, QApplication::UnicodeUTF8));
-        LB_Mejoras->setText(QApplication::translate("Dialog", "-Opci\303\263n de Guardar Como...\n"
-"\n"
-"-Busqueda exacta o por subcadenas.\n"
-"\n"
-"-Valores de b\303\272squeda conectados por Y o por O.\n"
-"\n"
-"-Trabajar con varios ficheros a trav\303\251s de pesta\303\261as.\n"
-"\n"
-"-Exportar a formato CVS.\n"
-"\n"
-"-Opci\303\263n de crear un nuevo fichero.\n"
-"\n"
-"-Comprobar malformaci\303\263n de un fichero.\n"
-"\n"
-"-Movimiento de N en N entre registros.\n"
-"\n"
-"-Confirmaciones al usuario de actividades 'peligrosas'.\n"
-"", 0, QApplication::UnicodeUTF8));
+        LB_Mejoras->setText(QApplication::translate("Dialog", "Las mejoras incluidas son:\n"
+"	-	Guardar como...\n"
+"	-	B\303\272squeda exacta y por subcadenas\n"
+"	-	B\303\272squeda con operador \"Y\" y con operador \"O\"\n"
+"	-	Gesti\303\263n de m\303\272ltiples ficheros independientes\n"
+"	-	Exportar a CSV\n"
+"	-	Nuevo fichero...\n"
+"	-	Comprobaci\303\263n de fichero mal formado\n"
+"	-	Nuevo fichero...\n"
+"	-	Navegaci\303\263n de N en N\n"
+"	-	Di\303\241logos de confirmaci\303\263n\n"
+"	-	L\303\255mites din\303\241micos en el movimiento entre registros\n"
+"	-	Pesta\303\261as con bot\303\263n de cierre en Gtk", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };
