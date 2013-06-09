@@ -10,9 +10,8 @@ LINKS=-lboost_regex
 
 all: vistaGTK vistaQT
 
-vistaGTK: ./Modelo/modelo.o ./Modelo/persona.o ./Modelo/gestorFicheros.o $(OBJ_GTK)
-	$(COMP) $(OPC) $(GTK_OPC) $(OBJ_GTK) Modelo/modelo.o Modelo/persona.o Modelo/gestorFicheros.o Vista-gtkmm/main.cc $(LINKS) $(GTK_LINKS) -o ./Vista-gtkmm/mainGTK
-
+vistaGTK: 
+	cd Vista-gtkmm/; make
 vistaQT: 
 	cd Vista-qt/; make
 
@@ -23,8 +22,6 @@ vistaQT:
 ./Modelo/gestorFicheros.o:
 	cd Modelo/;	make objetos
 
-./Vista-gtkmm/*.o: ./Vista-gtkmm/*.cc ./Vista-gtkmm/*.h
-	cd Vista-gtkmm/; make objetos
 
 
 clean:
