@@ -20,7 +20,6 @@ protected:
   //Signal handlers:
   void on_button_quit_tab(Gtk::Widget*);
   void addTabNuevo();
-  void addTab(string);
   void quit();
   void abrir();
   void guardar();
@@ -29,6 +28,8 @@ protected:
   void exportar();
   void nuevoRegistro();
   void acercaDe();
+
+  void addTab(string);
 
   Glib::RefPtr<Gtk::Builder> builder;
  private:

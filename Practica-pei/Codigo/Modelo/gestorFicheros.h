@@ -12,15 +12,11 @@ using namespace std;
 
 class gestorFicheros
 {
-private:
-	vector<string> files;
-	void escribirPersona(ofstream & salida, persona nuevaPersona);
-
 public:
 	gestorFicheros(){}
 	~gestorFicheros(){}
 
-	int add(string file) ;
+	int add(string file);
 	int newFile(string file);
 	void removeFile(int pos);
 	vector<string> getFicheros();
@@ -32,8 +28,9 @@ public:
 	vector<persona> getPersonas(int indiceFichero);
 
 	void escribirVectorPersonas(int indiceFichero, vector<persona> nuevasPersonas);
-	void anyadirPersona(int indiceFichero, persona nuevaPersona);
 	int anyadirAvector(string file);
-	/* data */
+private:
+	vector<string> files;
+	void escribirPersona(ofstream & salida, persona nuevaPersona);
 };
 #endif

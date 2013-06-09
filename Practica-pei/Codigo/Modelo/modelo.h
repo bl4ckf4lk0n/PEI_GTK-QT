@@ -35,8 +35,7 @@ public:
 	int getNumFicheros(){return listaPersonas.size();}
 
 	//Funciones usuario
-	/*Realiza una llamada al gestor de ficheros para grabar las modificaciones realizadas en el7
-	  fichero correspondiente*/
+	/*Realiza una llamada al gestor de ficheros para grabar las modificaciones realizadas en el fichero correspondiente*/
 	void GuardarEnFichero(int pos);
 	
 	/*Guarda los datos de una pestaña en un nuevo fichero especificado por el usuario*/

@@ -155,18 +155,6 @@ void gestorFicheros::escribirVectorPersonas(int indiceFichero, vector<persona> n
 	}
 }
 
-void gestorFicheros::anyadirPersona(int indiceFichero, persona nuevaPersona){
-	ofstream salida;
-	salida.open(files.at(indiceFichero).c_str(),ios::app);
-
-	if(salida.is_open()){
-		escribirPersona(salida, nuevaPersona);
-		salida.close();
-	}else{
-		throw fileException("Ha ocurrido un error al abrir el registro de personas");
-	}	
-}
-
 void gestorFicheros::escribirPersona(ofstream& salida, persona nuevaPersona){
 	salida<<endl
 			<<"NOMBRE "<<nuevaPersona.getNombre()<<endl
