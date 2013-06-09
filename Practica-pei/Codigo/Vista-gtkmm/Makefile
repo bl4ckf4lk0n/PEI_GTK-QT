@@ -1,7 +1,7 @@
 COMP=g++
-OPC=-g -Wall -std=c++0x `pkg-config gtkmm-3.0 --cflags` -lboost_regex
+OPC=-g -Wall -std=c++0x `pkg-config gtkmm-3.0 --cflags`
 OPC_MODELO=-Wall -std=c++0x
-LINKS=`pkg-config gtkmm-3.0 --libs`
+LINKS=`pkg-config gtkmm-3.0 --libs` -lboost_regex
 OBJ=formulario_registro.o formulario_busqueda.o plantilla.o nuevo.o
 OBJ_MODELO=modelo.o persona.o gestorFicheros.o
 
