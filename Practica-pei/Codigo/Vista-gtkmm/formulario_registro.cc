@@ -80,7 +80,7 @@ void FormularioRegistro::on_btn_adelante_clicked(){
 		if(index + valor < mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page())){
 			index += valor;
 		}else{
-			cerr<<"Error en el valor"<<endl;
+			cerr<<"[I] Valor fuera del listado de registros. Ignorando"<<endl;
 		}
 		MostrarPersona();
 		ActualizarLabelRegistro();
@@ -103,7 +103,7 @@ void FormularioRegistro::on_btn_atras_clicked(){
 		if(index - valor >= 0){
 			index -= valor;
 		}else{
-			cerr<<"Error en el valor"<<endl;
+			cerr<<"[I] Valor fuera del listado de registros. Ignorando"<<endl;
 		}
 		MostrarPersona();
 

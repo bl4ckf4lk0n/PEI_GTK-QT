@@ -13,7 +13,7 @@ int gestorFicheros::add(string file) {
 		origen.close();
 		return files.size()-1;
 	}else{
-		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
+		throw fileException("Ha ocurrido un error al abrir el registro de personas");
 	}
 	return -1;
 }
@@ -36,11 +36,11 @@ int gestorFicheros::newFile(string file){
 			files.push_back(file);
 			return files.size()-1;
 		}else{
-			throw fileException("[E] Ha ocurrido un error al crear el nuevo fichero.");
+			throw fileException("Ha ocurrido un error al crear el nuevo fichero.");
 		}
 	}else{
 		origen.close();
-		throw fileException("[E] No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre.");
+		throw fileException("No se puede crear el fichero " + file + ". Ya existe un fichero con ese nombre.");
 		
 	}
 	return -1;
@@ -54,7 +54,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 
 	if(origen.is_open()){
 		if(origen.peek() == std::ifstream::traits_type::eof()){
-			throw fileException("[E] Archivo vacío");
+			throw fileException("Archivo vacío");
 		}
 		string linea;
 		bool correcto = false;
@@ -70,7 +70,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 
 					//linea ahora contiene el nombre
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					nombre = linea;
@@ -79,7 +79,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					//linea ahora contiene la dirección
 					regEx= "^DIRECCION";
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					direccion = linea;
@@ -88,7 +88,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					//linea ahora contiene la población
 					regEx= "^POBLACION";
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					poblacion = linea;
@@ -97,7 +97,7 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					//linea ahora contiene el cpostal
 					regEx= "^CPOSTAL";
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					cod_postal = linea;
@@ -106,18 +106,16 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					//linea ahora contiene el teléfono
 					regEx= "^TELEFONO";
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
-					/*cout<< "El telefono es: -" + linea + "-"<<endl;
-					telefono = boost::lexical_cast<int,string>(linea.data());*/
 					telefono = linea;
 
 					getline(origen, linea);
 					//linea ahora contiene el email
 					regEx= "^EMAIL";
 					if(!boost::regex_search(linea,regEx))
-						throw fileException("[E] Archivo con formato incorrecto");
+						throw fileException("Archivo con formato incorrecto");
 					boost::algorithm::erase_regex(linea,regEx);
 					boost::trim_left(linea);
 					email = linea;
@@ -126,16 +124,16 @@ vector<persona> gestorFicheros::getPersonas(int indiceFichero){
 					retorno.push_back(nueva);
 					correcto = true;
 				}catch(ios_base::failure ex){
-					throw fileException("[E] Archivo con formato incorrecto");
+					throw fileException("Archivo con formato incorrecto");
 				}
 			}
 		}
 		if(!correcto){
-			throw fileException("[E] Archivo con formato incorrecto");
+			throw fileException("Archivo con formato incorrecto");
 		}
 		origen.close();
 	}else{
-		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
+		throw fileException("Ha ocurrido un error al abrir el registro de personas");
 	}	
 	return retorno;
 }
@@ -165,7 +163,7 @@ void gestorFicheros::anyadirPersona(int indiceFichero, persona nuevaPersona){
 		escribirPersona(salida, nuevaPersona);
 		salida.close();
 	}else{
-		throw fileException("[E] Ha ocurrido un error al abrir el registro de personas");
+		throw fileException("Ha ocurrido un error al abrir el registro de personas");
 	}	
 }
 

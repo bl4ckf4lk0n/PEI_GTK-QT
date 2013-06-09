@@ -28,7 +28,6 @@ protected:
   void buscar();
   void exportar();
   void nuevoRegistro();
-  void getArchivo();
   void acercaDe();
 
   Glib::RefPtr<Gtk::Builder> builder;

@@ -97,52 +97,45 @@ void Plantilla::on_button_quit_tab(Gtk::Widget* hijo)
 	    	pPestanas->remove_page(numpage);
 	    	mod.EliminarFichero(numpage);
 		}else{
-	    	cout<<"Ha ocurrido un error, numpage es : "<<numpage<<endl;
+			string errormsg = "Ha ocurrido un error al cerrar la pestaña";
+	    	cerr<<"[E] "<<errormsg<<endl;
+			Gtk::MessageDialog error(*this, errormsg,
+				false, Gtk::MESSAGE_ERROR,
+				Gtk::BUTTONS_OK);
+			error.run();
+			error.hide();
 	  	}
   	}
 }
 
 void Plantilla::abrir(){
-	cout<<"Función Abrir..."<<endl;
 	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_OPEN);
 	dialogo->set_modal(true);
 	int result = dialogo->run();
 	string archivo = "";
-	switch(result)
+	if(result == Gtk::RESPONSE_OK)
 	{
-	case(Gtk::RESPONSE_OK):
-		{
+		try{
 			archivo = dialogo->get_filename();
-		  	cout << "archivo selecccionado: " << archivo << endl;
 		  	mod.LeerFichero(archivo);
 		  	addTab(archivo);
-		  	break;
+		}catch(fileException& e){
+			cerr<<"[E] "<<e.what()<<endl;
+			Gtk::MessageDialog error(*this, e.what(),
+				false, Gtk::MESSAGE_ERROR,
+				Gtk::BUTTONS_OK);
+			error.run();
+			error.hide();
 		}
-	case(Gtk::RESPONSE_CANCEL):
-		{
-		  cout << "Apertura cancelada" << endl;
-		  break;
-		}
-	default:
-		{
-		  cout << "Ha ocurrido algo extraño" << endl;
-		  break;
-		}
+	}else{
+		cerr << "[I] Apertura cancelada" << endl;
 	}
 	dialogo->hide();
 }
 
-void Plantilla::getArchivo(){
-	string archivo = dialogo->get_filename();
-	cout<<"El archivo es:"<<archivo<<endl;
-	dialogo->hide();
-}
-
 void Plantilla::guardar(){
-	cout<<"Función Guardar..."<<endl;
 	if(mod.ObtenerRuta(pPestanas->get_current_page()) != "")
     {
-        cout<<mod.ObtenerRuta(pPestanas->get_current_page())<<endl;
         mod.GuardarEnFichero(pPestanas->get_current_page());
     }
     else
@@ -152,7 +145,6 @@ void Plantilla::guardar(){
 }
 
 void Plantilla::guardarComo(){
-	cout<<"Función guardar como..."<<endl;
 	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dialogo->set_modal(true);
 	dialogo->set_do_overwrite_confirmation (true);
@@ -160,7 +152,6 @@ void Plantilla::guardarComo(){
 	string archivo = "";
 	if(result == Gtk::RESPONSE_OK){
 			archivo = dialogo->get_filename();
-		  	cout << "archivo selecccionado: " << archivo << endl;
 		  	mod.GuardarComo(archivo,pPestanas->get_current_page());
 
 		  	// cambiamos el nombre de la pestaña al nombre del archivo
@@ -172,7 +163,6 @@ void Plantilla::guardarComo(){
 }
 
 void Plantilla::buscar(){
-	cout<<"Función buscar..."<<endl;
 	if(pPestanas->get_n_pages() > 0){
 		Glib::RefPtr<Gtk::Builder> builder_busqueda = Gtk::Builder::create_from_file("formulario_busqueda.glade");
 		FormularioBusqueda* dialog = 0;
@@ -202,14 +192,12 @@ void Plantilla::buscar(){
 }
 
 void Plantilla::exportar(){
-	cout<<"Función Exportar..."<<endl;
 	dialogo->set_action(Gtk::FILE_CHOOSER_ACTION_SAVE);
 	dialogo->set_modal(true);
 	int result = dialogo->run();
 	string archivo = "";
 	if(result == Gtk::RESPONSE_OK){
 		archivo = dialogo->get_filename();
-	  	cout << "archivo selecccionado: " << archivo << endl;
 	  	mod.ExportarCSV(archivo,pPestanas->get_current_page());
 	}
 	dialogo->hide();
@@ -217,7 +205,6 @@ void Plantilla::exportar(){
 
 void Plantilla::nuevoRegistro(){
 	if(pPestanas->get_n_pages() > 0){
-		cout<<"Función nuevoRegistro, debe abrir un diálogo para crear uno nuevo, y luego guardarlo en el archivo actual ..."<<endl;
 		Glib::RefPtr<Gtk::Builder> builder_nuevo = Gtk::Builder::create_from_file("nuevo.glade");
 		FormularioNuevo* dialog = 0;
 		builder_nuevo->get_widget_derived("ventana_nuevo",dialog);
