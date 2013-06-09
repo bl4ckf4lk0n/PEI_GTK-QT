@@ -31,7 +31,7 @@ protected:
 
   void ActualizarLabelRegistro();
 	void MostrarPersona(persona p);
-  	Glib::RefPtr<Gtk::Builder> builder;
+	Glib::RefPtr<Gtk::Builder> builder;
  private:
  	modelo* mod;
  	int index;

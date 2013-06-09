@@ -135,10 +135,8 @@ void FormularioRegistro::on_btn_ModRegistro_clicked(){
 
 void FormularioRegistro::on_btn_BorrarRegistro_clicked(){
 	int continuar = Gtk::RESPONSE_OK;
-	//if(modificado){
-		continuar = dialogo_confirmacion->run();
-		dialogo_confirmacion->hide();
-	//}
+	continuar = dialogo_confirmacion->run();
+	dialogo_confirmacion->hide();
 	if(continuar == Gtk::RESPONSE_OK){
 		if(mod->getNumPersonas(static_cast<Gtk::Notebook*>(get_parent())->get_current_page()) > 0){
 			mod->BorrarPersona(static_cast<Gtk::Notebook*>(get_parent())->get_current_page(),index);
